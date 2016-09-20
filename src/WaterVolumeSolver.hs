@@ -46,7 +46,7 @@ main = do
         let watergaps = runPar $ parEval 100 list
         return $ volume watergaps
     putStrLn $ "Volume: " ++ show vol
-    putStrLn $ "Time in ms: " ++ show ((fromIntegral sec) * 1000 + (fromIntegral nsec) / 1000)
+    putStrLn $ "Time in ms: " ++ show ((fromIntegral sec) * 1000 + (fromIntegral nsec) / 1000000)
 
 parEval :: Int -> [Int] -> Par PillarLine
 parEval n xs = do
