@@ -1,0 +1,64 @@
+
+==================== FINAL INTERFACE ====================
+2016-09-20 20:41:46.390478 UTC
+
+interface main@main:Main 7103
+  interface hash: eb4d6b71b8b28391cfcdf86e9f8932a6
+  ABI hash: cdbba0345cfa43306300dec6d2126f3e
+  export-list hash: 3a30900703a2aa664b3630d48fe89e79
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: 2f7310366f8d8efb9a582560ad974b28
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  Main.main
+module dependencies:
+package dependencies: WaterVolumeSolver-0.1.0.0@Water_95FBMSur5uJLWmCvPCHuCl
+                      abstract-par-0.3.3@abstr_L1snHpEAWsL0S2A3rOumSN
+                      array-0.5.1.0@array_67iodizgJQIIxYVTp4emlA base-4.8.2.0
+                      clock-0.7.2@clock_25jKxsKUfKCI5az98RdfRZ
+                      containers-0.5.6.2@conta_2C3ZI8RgPO2LBMidXKTvIU
+                      deepseq-1.4.1.1@deeps_6vMKxt5sPFR0XsbRWvvq59 ghc-prim-0.4.0.0
+                      integer-gmp-1.0.0.0
+                      monad-par-extras-0.3.3@monad_2Djrgge7sndL6tvzoMxpYM
+                      monad-par-0.3.4.8@monad_6VUKksahaJq7nZeOjTjnor
+                      stopwatch-0.1.0.2@stopw_3IDXWr94HZdJD63iJvXIOp
+                      transformers-0.4.2.0@trans_GZTjP9K5WFq01xC9BAGQpF
+orphans: base-4.8.2.0:GHC.Base base-4.8.2.0:GHC.Float
+         monad-par-0.3.4.8@monad_6VUKksahaJq7nZeOjTjnor:Control.Monad.Par.Scheds.Trace
+family instance modules: WaterVolumeSolver-0.1.0.0@Water_95FBMSur5uJLWmCvPCHuCl:WaterVolumeSolver
+                         base-4.8.2.0:Control.Applicative base-4.8.2.0:Data.Either
+                         base-4.8.2.0:Data.Functor.Identity base-4.8.2.0:Data.Monoid
+                         base-4.8.2.0:Data.Type.Equality base-4.8.2.0:Data.Void
+                         base-4.8.2.0:GHC.Exts base-4.8.2.0:GHC.Generics
+                         clock-0.7.2@clock_25jKxsKUfKCI5az98RdfRZ:System.Clock
+                         containers-0.5.6.2@conta_2C3ZI8RgPO2LBMidXKTvIU:Data.Sequence
+import  -/  WaterVolumeSolver-0.1.0.0@Water_95FBMSur5uJLWmCvPCHuCl:WaterVolumeSolver c490780521be6528e354ab740597e96d
+import  -/  base-4.8.2.0:Prelude 694dcaf039efe62df1c44834e2dbd2fb
+import  -/  ghc-prim-0.4.0.0:GHC.Types 6b27fb3fdbd0e3f0925a4496c66513bb
+2309ab9d70d6ba9b313450eb22f6519b
+  main :: GHC.Types.IO ()
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (0, True, True)
+                WaterVolumeSolver.main1
+                  `cast`
+                (Sym (GHC.Types.NTCo:IO[0] <()>_R)) -}
+f71d45a6e4f3a2e24c7173efc7e78d10
+  main1 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1,
+     Unfolding: (GHC.TopHandler.runMainIO1
+                   @ ()
+                   WaterVolumeSolver.main1
+                     `cast`
+                   (Sym (GHC.Types.NTCo:IO[0] <()>_R))) -}
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: none
+require own pkg trusted: False
+

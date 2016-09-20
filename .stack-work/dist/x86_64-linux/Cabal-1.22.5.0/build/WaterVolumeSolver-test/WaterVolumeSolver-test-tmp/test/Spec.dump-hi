@@ -1,0 +1,245 @@
+
+==================== FINAL INTERFACE ====================
+2016-09-19 18:38:25.422026 UTC
+
+interface main@main:Main 7103
+  interface hash: 9d089ad1d8e654a05e79389b2a38f8f2
+  ABI hash: 82d6131f4c77625413151c9b6b7ab4b3
+  export-list hash: 9d23db7e8e94b5a6869f049d5aa1e100
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: a88c1c7443592f8eb1b704b4f2eb1f74
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  Main.main
+module dependencies:
+package dependencies: WaterVolumeSolver-0.1.0.0@Water_HgGKHjfzJBH1aF41B3V5sX
+                      abstract-par-0.3.3@abstr_L1snHpEAWsL0S2A3rOumSN
+                      array-0.5.1.0@array_67iodizgJQIIxYVTp4emlA base-4.8.2.0
+                      deepseq-1.4.1.1@deeps_6vMKxt5sPFR0XsbRWvvq59 ghc-prim-0.4.0.0
+                      integer-gmp-1.0.0.0
+                      monad-par-extras-0.3.3@monad_2Djrgge7sndL6tvzoMxpYM
+                      monad-par-0.3.4.8@monad_6VUKksahaJq7nZeOjTjnor
+orphans: base-4.8.2.0:GHC.Base base-4.8.2.0:GHC.Float
+         monad-par-0.3.4.8@monad_6VUKksahaJq7nZeOjTjnor:Control.Monad.Par.Scheds.Trace
+family instance modules: WaterVolumeSolver-0.1.0.0@Water_HgGKHjfzJBH1aF41B3V5sX:WaterVolumeSolver
+                         base-4.8.2.0:Control.Applicative base-4.8.2.0:Data.Either
+                         base-4.8.2.0:Data.Functor.Identity base-4.8.2.0:Data.Monoid
+                         base-4.8.2.0:Data.Type.Equality base-4.8.2.0:Data.Void
+                         base-4.8.2.0:GHC.Generics
+import  -/  WaterVolumeSolver-0.1.0.0@Water_HgGKHjfzJBH1aF41B3V5sX:WaterVolumeSolver 8531e766b13159f5922b566ab34b2c1b
+import  -/  base-4.8.2.0:GHC.Base 1db77db5dae73d8c424c85b09fbadb89
+import  -/  base-4.8.2.0:GHC.List 0c736920522bbd14b770342776012ab6
+import  -/  base-4.8.2.0:GHC.Show 0e1d8380a8fb0cfb07ebeda3b70cbf38
+import  -/  base-4.8.2.0:Prelude 694dcaf039efe62df1c44834e2dbd2fb
+import  -/  base-4.8.2.0:System.Environment ba6e36000c8274703cf7786fbe8d0f6c
+import  -/  base-4.8.2.0:System.IO 0248c1e850b7ea124cf7a2e1669ebf67
+import  -/  base-4.8.2.0:Text.Read ef0ef92fb7358ae94bab089940adfd2a
+import  -/  deepseq-1.4.1.1@deeps_6vMKxt5sPFR0XsbRWvvq59:Control.DeepSeq 269ef0c8d019d01c547937e1ae8fb2e8
+import  -/  ghc-prim-0.4.0.0:GHC.Types 6b27fb3fdbd0e3f0925a4496c66513bb
+761800142a83cebb195179e44a7c012c
+  main :: GHC.Types.IO ()
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (0, True, True)
+                Main.main1 `cast` (Sym (GHC.Types.NTCo:IO[0] <()>_R)) -}
+94f77a1b83fe36522338b47153b174dc
+  main1 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: (\ s :: GHC.Prim.State# GHC.Prim.RealWorld[OneShot] ->
+                 case GHC.IO.Handle.Text.hPutStr2
+                        GHC.IO.Handle.FD.stdout
+                        Main.main21
+                        GHC.Types.True
+                        s of ds1 { (#,#) ipv ipv1 ->
+                 case Main.main13
+                        Main.main12
+                        Main.main11
+                        ipv of ds2 { (#,#) ipv2 ipv3 ->
+                 case Main.main13
+                        Main.main10
+                        Main.main9
+                        ipv2 of ds3 { (#,#) ipv4 ipv5 ->
+                 case Main.main13
+                        Main.main8
+                        Main.main7
+                        ipv4 of ds4 { (#,#) ipv6 ipv7 ->
+                 case Main.main13
+                        Main.main6
+                        Main.main5
+                        ipv6 of ds5 { (#,#) ipv8 ipv9 ->
+                 case Main.main13
+                        Main.main4
+                        Main.main3
+                        ipv8 of ds6 { (#,#) ipv10 ipv11 ->
+                 GHC.IO.Handle.Text.hPutStr2
+                   GHC.IO.Handle.FD.stdout
+                   Main.main2
+                   GHC.Types.True
+                   ipv10 } } } } } }) -}
+38ada7aa5a934e6f1b3f58a389437139
+  main10 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "test/testdata/test_32.txt"#) -}
+0b3c2d287177ffd6455cecd8f034c01d
+  main11 :: GHC.Types.Int
+  {- HasNoCafRefs, Unfolding: (GHC.Types.I# 8) -}
+106b63658f5769df734d1282449d7927
+  main12 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "test/testdata/test_16.txt"#) -}
+da64f23d4bdae7bb97ec5b30ad474524
+  main13 ::
+    GHC.Base.String
+    -> GHC.Types.Int
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 3, Strictness: <L,U><L,1*U(U)><L,U>,
+     Unfolding: (\ path :: GHC.Base.String
+                   n :: GHC.Types.Int
+                   eta :: GHC.Prim.State# GHC.Prim.RealWorld[OneShot] ->
+                 case GHC.IO.Handle.FD.openFile1
+                        path
+                        GHC.IO.IOMode.ReadMode
+                        eta of ds1 { (#,#) ipv ipv1 ->
+                 case GHC.IO.Handle.Text.hGetContents1
+                        ipv1
+                        ipv of ds2 { (#,#) ipv2 ipv3 ->
+                 GHC.IO.Handle.Text.hPutStr2
+                   GHC.IO.Handle.FD.stdout
+                   (case n of wild { GHC.Types.I# x ->
+                    case Text.Read.readEither6
+                           @ [GHC.Types.Int]
+                           (Text.ParserCombinators.ReadP.run
+                              @ [GHC.Types.Int]
+                              Main.main20
+                              (GHC.Types.:
+                                 @ GHC.Types.Char
+                                 Main.main19
+                                 (GHC.Base.++ @ GHC.Types.Char ipv3 Main.main18))) of wild1 {
+                      [] -> case Main.main17 ret_ty GHC.Base.String of {}
+                      : x1 ds
+                      -> case ds of wild2 {
+                           []
+                           -> case GHC.Prim.tagToEnum#
+                                     @ GHC.Types.Bool
+                                     (GHC.Prim.<=# x 0) of wild3 {
+                                GHC.Types.False
+                                -> case x1 of wild4 {
+                                     [] -> Main.main16
+                                     : ipv4 ipv5
+                                     -> case x of ds3 {
+                                          DEFAULT
+                                          -> case GHC.List.splitAt_$s$wsplitAt'
+                                                    @ GHC.Types.Int
+                                                    (GHC.Prim.-# ds3 1)
+                                                    ipv5 of ww { (#,#) ww1 ww2 ->
+                                             Main.main15
+                                               (GHC.Types.: @ GHC.Types.Int ipv4 ww1)
+                                               ww2 }
+                                          1
+                                          -> Main.main15
+                                               (GHC.Types.:
+                                                  @ GHC.Types.Int
+                                                  ipv4
+                                                  (GHC.Types.[] @ GHC.Types.Int))
+                                               ipv5 } }
+                                GHC.Types.True -> Main.main15 (GHC.Types.[] @ GHC.Types.Int) x1 }
+                           : ipv4 ipv5 -> case Main.main14 ret_ty GHC.Base.String of {} } } })
+                   GHC.Types.True
+                   ipv2 } }) -}
+d115de8e537b5e01feaaae775edee64a
+  main14 :: [GHC.Types.Int]
+  {- Strictness: b -}
+db7d683c045e809c2fe20e1d2237770a
+  main15 :: [GHC.Types.Int] -> [GHC.Types.Int] -> GHC.Base.String
+  {- Arity: 2, Strictness: <S,1*U><S,1*U>,
+     Unfolding: (\ l :: [GHC.Types.Int][OneShot]
+                   r :: [GHC.Types.Int][OneShot] ->
+                 case WaterVolumeSolver.$wsolve l of ww { (#,#) ww1 ww2 ->
+                 case WaterVolumeSolver.$wsolve r of ww4 { (#,#) ww5 ww6 ->
+                 case WaterVolumeSolver.$wmerge
+                        ww1
+                        ww2
+                        ww5
+                        ww6 of ww7 { (#,#) ww8 ww9 ->
+                 case WaterVolumeSolver.$wvolume ww8 ww9 of ww3 { DEFAULT ->
+                 case GHC.Show.$wshowSignedInt
+                        0
+                        ww3
+                        (GHC.Types.[] @ GHC.Types.Char) of ww10 { (#,#) ww11 ww12 ->
+                 GHC.Types.: @ GHC.Types.Char ww11 ww12 } } } } }) -}
+2a4d9b63a0a8ff53e286c3ea3a48d814
+  main16 :: GHC.Base.String
+  {- Unfolding: (Main.main15
+                   (GHC.Types.[] @ GHC.Types.Int)
+                   (GHC.Types.[] @ GHC.Types.Int)) -}
+90f6fd332c22f70f1e21e4964c2d809d
+  main17 :: [GHC.Types.Int]
+  {- Strictness: b -}
+f08a4128eae07a30333b20ee70f3e600
+  main18 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "]"#) -}
+dc42d4cb9f95df6c8d4d6b53430c29d7
+  main19 :: GHC.Types.Char
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.C# '[') -}
+556034a06d2c6f156312ad46fca7862b
+  main2 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "DONE"#) -}
+3d6a7347f0368ea0f257ff6751729b01
+  main20 :: Text.ParserCombinators.ReadP.P [GHC.Types.Int]
+  {- Unfolding: (GHC.Read.$wa
+                   @ GHC.Types.Int
+                   GHC.Read.$fReadInt2
+                     `cast`
+                   (Sym (Text.ParserCombinators.ReadPrec.NTCo:ReadPrec[0]
+                             <GHC.Types.Int>_R))
+                   @ [GHC.Types.Int]
+                   (Text.Read.readEither5 @ [GHC.Types.Int])) -}
+1ac6fa39e7179540066915cd7dd7f474
+  main21 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "\n\
+                   \BEGIN TEST"#) -}
+83c6c6565ff4c5c038e982a3a990ba1f
+  main22 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1,
+     Unfolding: (GHC.TopHandler.runMainIO1
+                   @ ()
+                   Main.main1 `cast` (Sym (GHC.Types.NTCo:IO[0] <()>_R))) -}
+dfeb1e86a02125a676dde280d9931aea
+  main3 :: GHC.Types.Int
+  {- HasNoCafRefs, Unfolding: (GHC.Types.I# 512) -}
+41b37f76ad9864a5b72c2a7277c517ed
+  main4 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "test/testdata/test_1024.txt"#) -}
+0ac6ba8cf0ec7fab665913bc7a01588c
+  main5 :: GHC.Types.Int
+  {- HasNoCafRefs, Unfolding: (GHC.Types.I# 256) -}
+37ac7214272b4f812a25e63bb92055ee
+  main6 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "test/testdata/test_512.txt"#) -}
+14e4ef832f8bc6011eb3d9cbc3389e19
+  main7 :: GHC.Types.Int
+  {- HasNoCafRefs, Unfolding: (GHC.Types.I# 128) -}
+7279c64a8669dc139a4879c3d65f93a1
+  main8 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "test/testdata/test_256.txt"#) -}
+38dd22376af973389c18ca5d05ca3e19
+  main9 :: GHC.Types.Int
+  {- HasNoCafRefs, Unfolding: (GHC.Types.I# 16) -}
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: none
+require own pkg trusted: False
+

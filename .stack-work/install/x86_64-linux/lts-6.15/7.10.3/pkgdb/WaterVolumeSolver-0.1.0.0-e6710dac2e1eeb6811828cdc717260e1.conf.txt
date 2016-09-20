@@ -1,0 +1,28 @@
+name: WaterVolumeSolver
+version: 0.1.0.0
+id: WaterVolumeSolver-0.1.0.0-e6710dac2e1eeb6811828cdc717260e1
+key: Water_JQmZI1azTwJFjIXfyQSWqI
+license: BSD3
+copyright: 2016 Author name here
+maintainer: example@example.com
+homepage: https://github.com/githubuser/WaterVolumeSolver#readme
+synopsis: Initial project template from stack
+description:
+    Please see README.md
+category: Web
+author: Author name here
+exposed: True
+exposed-modules:
+    Lib WaterVolumeSolver
+trusted: False
+import-dirs: /home/ferdinand/Projects/WaterVolumeSolver/.stack-work/install/x86_64-linux/lts-6.15/7.10.3/lib/x86_64-linux-ghc-7.10.3/WaterVolumeSolver-0.1.0.0-JQmZI1azTwJFjIXfyQSWqI
+library-dirs: /home/ferdinand/Projects/WaterVolumeSolver/.stack-work/install/x86_64-linux/lts-6.15/7.10.3/lib/x86_64-linux-ghc-7.10.3/WaterVolumeSolver-0.1.0.0-JQmZI1azTwJFjIXfyQSWqI
+data-dir: /home/ferdinand/Projects/WaterVolumeSolver/.stack-work/install/x86_64-linux/lts-6.15/7.10.3/share/x86_64-linux-ghc-7.10.3/WaterVolumeSolver-0.1.0.0
+hs-libraries: HSWaterVolumeSolver-0.1.0.0-JQmZI1azTwJFjIXfyQSWqI
+depends:
+    base-4.8.2.0-0d6d1084fbc041e1cded9228e80e264d
+    deepseq-1.4.1.1-614b63b36dd6e29d2b35afff57c25311
+    mtl-2.2.1-3af90341e75ee52dfc4e3143b4e5d219
+    vector-0.11.0.0-299aefb173ce5a731565d31f609a0cfd
+haddock-interfaces: /home/ferdinand/Projects/WaterVolumeSolver/.stack-work/install/x86_64-linux/lts-6.15/7.10.3/doc/WaterVolumeSolver-0.1.0.0/WaterVolumeSolver.haddock
+haddock-html: /home/ferdinand/Projects/WaterVolumeSolver/.stack-work/install/x86_64-linux/lts-6.15/7.10.3/doc/WaterVolumeSolver-0.1.0.0

@@ -1,0 +1,1883 @@
+
+==================== FINAL INTERFACE ====================
+2016-09-20 20:52:04.947316 UTC
+
+interface Water_95FBMSur5uJLWmCvPCHuCl:WaterVolumeSolver [family instance module] 7103
+  interface hash: 3f1d09baddc043276146453e2c873543
+  ABI hash: c490780521be6528e354ab740597e96d
+  export-list hash: 8953e0a5525701eb1137ecd4f62193f9
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: 09fb6e23130b4e4abb75ce71518bd18d
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  WaterVolumeSolver.addBlockVolume
+  WaterVolumeSolver.blVolDown
+  WaterVolumeSolver.blVolUp
+  WaterVolumeSolver.main
+  WaterVolumeSolver.maxWGap
+  WaterVolumeSolver.merge
+  WaterVolumeSolver.mergeLeft
+  WaterVolumeSolver.mergeLeftMany
+  WaterVolumeSolver.mergeLeftSingle
+  WaterVolumeSolver.mergeRight
+  WaterVolumeSolver.mergeRightMany
+  WaterVolumeSolver.mergeRightSingle
+  WaterVolumeSolver.minWGap
+  WaterVolumeSolver.parEval
+  WaterVolumeSolver.parEvalChunk
+  WaterVolumeSolver.parFoldChunk
+  WaterVolumeSolver.sHead
+  WaterVolumeSolver.sInit
+  WaterVolumeSolver.sLast
+  WaterVolumeSolver.sTail
+  WaterVolumeSolver.solve
+  WaterVolumeSolver.solve'
+  WaterVolumeSolver.volume
+  WaterVolumeSolver.volumeWaterGap
+  WaterVolumeSolver.PillarLine
+  WaterVolumeSolver.WaterGap{WaterVolumeSolver.WaterGap WaterVolumeSolver._blockSum WaterVolumeSolver._blocks WaterVolumeSolver._left WaterVolumeSolver._right}
+  WaterVolumeSolver.WaterGaps
+module dependencies:
+package dependencies: abstract-par-0.3.3@abstr_L1snHpEAWsL0S2A3rOumSN
+                      array-0.5.1.0@array_67iodizgJQIIxYVTp4emlA base-4.8.2.0
+                      clock-0.7.2@clock_25jKxsKUfKCI5az98RdfRZ
+                      containers-0.5.6.2@conta_2C3ZI8RgPO2LBMidXKTvIU
+                      deepseq-1.4.1.1@deeps_6vMKxt5sPFR0XsbRWvvq59 ghc-prim-0.4.0.0
+                      integer-gmp-1.0.0.0
+                      monad-par-extras-0.3.3@monad_2Djrgge7sndL6tvzoMxpYM
+                      monad-par-0.3.4.8@monad_6VUKksahaJq7nZeOjTjnor
+                      stopwatch-0.1.0.2@stopw_3IDXWr94HZdJD63iJvXIOp
+                      transformers-0.4.2.0@trans_GZTjP9K5WFq01xC9BAGQpF
+orphans: base-4.8.2.0:GHC.Base base-4.8.2.0:GHC.Float
+         monad-par-0.3.4.8@monad_6VUKksahaJq7nZeOjTjnor:Control.Monad.Par.Scheds.Trace
+family instance modules: base-4.8.2.0:Control.Applicative
+                         base-4.8.2.0:Data.Either base-4.8.2.0:Data.Functor.Identity
+                         base-4.8.2.0:Data.Monoid base-4.8.2.0:Data.Type.Equality
+                         base-4.8.2.0:Data.Void base-4.8.2.0:GHC.Exts
+                         base-4.8.2.0:GHC.Generics
+                         clock-0.7.2@clock_25jKxsKUfKCI5az98RdfRZ:System.Clock
+                         containers-0.5.6.2@conta_2C3ZI8RgPO2LBMidXKTvIU:Data.Sequence
+import  -/  base-4.8.2.0:Data.Foldable 2ce969969ad5231eb40bd713f94f05ad
+import  -/  base-4.8.2.0:GHC.Base 1db77db5dae73d8c424c85b09fbadb89
+import  -/  base-4.8.2.0:GHC.Enum debc6de3086023a15993ab0cecffb90b
+import  -/  base-4.8.2.0:GHC.Generics c00a6d11ff9e9cf35a82831f837d9e97
+import  -/  base-4.8.2.0:GHC.List 0c736920522bbd14b770342776012ab6
+import  -/  base-4.8.2.0:GHC.Num 9f42750c866f5832ca565146bd660c60
+import  -/  base-4.8.2.0:GHC.Real 1281efa9baf803bc7859d7efb89a38b3
+import  -/  base-4.8.2.0:GHC.Show 0e1d8380a8fb0cfb07ebeda3b70cbf38
+import  -/  base-4.8.2.0:Prelude 694dcaf039efe62df1c44834e2dbd2fb
+import  -/  base-4.8.2.0:System.Environment ba6e36000c8274703cf7786fbe8d0f6c
+import  -/  base-4.8.2.0:System.IO 0248c1e850b7ea124cf7a2e1669ebf67
+import  -/  base-4.8.2.0:Text.Read ef0ef92fb7358ae94bab089940adfd2a
+import  -/  clock-0.7.2@clock_25jKxsKUfKCI5az98RdfRZ:System.Clock ee0c76668bd11af795e7eaa7a97cd467
+import  -/  containers-0.5.6.2@conta_2C3ZI8RgPO2LBMidXKTvIU:Data.Sequence 84fa36a5edd40294d161a22530741f85
+import  -/  deepseq-1.4.1.1@deeps_6vMKxt5sPFR0XsbRWvvq59:Control.DeepSeq 269ef0c8d019d01c547937e1ae8fb2e8
+import  -/  ghc-prim-0.4.0.0:GHC.Classes e1f4ff80f7b5262008a595d29986fb18
+import  -/  ghc-prim-0.4.0.0:GHC.Types 6b27fb3fdbd0e3f0925a4496c66513bb
+import  -/  monad-par-0.3.4.8@monad_6VUKksahaJq7nZeOjTjnor:Control.Monad.Par 85f8a5bab73d43c9f94ae4dc4046c66d
+import  -/  monad-par-0.3.4.8@monad_6VUKksahaJq7nZeOjTjnor:Control.Monad.Par.Scheds.Trace 7dab3dcc92f6407a9c8d42933932075a
+import  -/  monad-par-0.3.4.8@monad_6VUKksahaJq7nZeOjTjnor:Control.Monad.Par.Scheds.TraceInternal d98fc410211baf96dfdaec14be3f8f2b
+import  -/  stopwatch-0.1.0.2@stopw_3IDXWr94HZdJD63iJvXIOp:Control.StopWatch f70b2bd881bc736545ba081a13b6c6ea
+3632f1d4156ed19a18202f541f20d917
+  $fConstructorWaterGap ::
+    GHC.Generics.Constructor WaterVolumeSolver.C1_0WaterGap
+  DFunId[0]
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ WaterVolumeSolver.C1_0WaterGap
+                  WaterVolumeSolver.$fConstructorWaterGap_$cconName
+                  WaterVolumeSolver.$fConstructorWaterGap_$s$dmconFixity
+                  WaterVolumeSolver.$fConstructorWaterGap_$cconIsRecord -}
+cb91d1ce693dc4a81daafa428621a976
+  $fConstructorWaterGap1 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "WaterGap"#) -}
+3632f1d4156ed19a18202f541f20d917
+  $fConstructorWaterGap_$cconIsRecord ::
+    t WaterVolumeSolver.C1_0WaterGap f a -> GHC.Types.Bool
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,A>,
+     Unfolding: InlineRule (1, True, True)
+                (\ @ (t :: * -> (* -> *) -> * -> *)
+                   @ (f :: * -> *)
+                   @ a4
+                   ds :: t WaterVolumeSolver.C1_0WaterGap f a4 ->
+                 GHC.Types.True) -}
+3632f1d4156ed19a18202f541f20d917
+  $fConstructorWaterGap_$cconName ::
+    t WaterVolumeSolver.C1_0WaterGap f a -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,A>,
+     Unfolding: InlineRule (1, True, True)
+                (\ @ (t :: * -> (* -> *) -> * -> *)
+                   @ (f :: * -> *)
+                   @ a4
+                   ds :: t WaterVolumeSolver.C1_0WaterGap f a4 ->
+                 WaterVolumeSolver.$fConstructorWaterGap1) -}
+3632f1d4156ed19a18202f541f20d917
+  $fConstructorWaterGap_$s$dmconFixity ::
+    t WaterVolumeSolver.C1_0WaterGap f a -> GHC.Generics.Fixity
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,A>,
+     Unfolding: InlineRule (-1, True, True)
+                (\ @ (t :: * -> (* -> *) -> * -> *)
+                   @ (f :: * -> *)
+                   @ a4
+                   ds :: t WaterVolumeSolver.C1_0WaterGap f a4 ->
+                 GHC.Generics.Prefix) -}
+8176a213721a3bb48e236c5241aa67bd
+  $fDatatypeWaterGap ::
+    GHC.Generics.Datatype WaterVolumeSolver.D1WaterGap
+  DFunId[0]
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ WaterVolumeSolver.D1WaterGap
+                  WaterVolumeSolver.$fDatatypeWaterGap_$cdatatypeName
+                  WaterVolumeSolver.$fDatatypeWaterGap_$cmoduleName
+                  WaterVolumeSolver.$fDatatypeWaterGap_$s$dmisNewtype -}
+4fa6102ba259a759710d49909bc91ea4
+  $fDatatypeWaterGap1 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "WaterVolumeSolver"#) -}
+8176a213721a3bb48e236c5241aa67bd
+  $fDatatypeWaterGap_$cdatatypeName ::
+    t WaterVolumeSolver.D1WaterGap f a -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,A>,
+     Unfolding: InlineRule (1, True, True)
+                (\ @ (t :: * -> (* -> *) -> * -> *)
+                   @ (f :: * -> *)
+                   @ a4
+                   ds :: t WaterVolumeSolver.D1WaterGap f a4 ->
+                 WaterVolumeSolver.$fConstructorWaterGap1) -}
+8176a213721a3bb48e236c5241aa67bd
+  $fDatatypeWaterGap_$cmoduleName ::
+    t WaterVolumeSolver.D1WaterGap f a -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,A>,
+     Unfolding: InlineRule (1, True, True)
+                (\ @ (t :: * -> (* -> *) -> * -> *)
+                   @ (f :: * -> *)
+                   @ a4
+                   ds :: t WaterVolumeSolver.D1WaterGap f a4 ->
+                 WaterVolumeSolver.$fDatatypeWaterGap1) -}
+8176a213721a3bb48e236c5241aa67bd
+  $fDatatypeWaterGap_$s$dmisNewtype ::
+    t WaterVolumeSolver.D1WaterGap f a -> GHC.Types.Bool
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,A>,
+     Unfolding: InlineRule (-1, True, True)
+                (\ @ (t :: * -> (* -> *) -> * -> *)
+                   @ (f :: * -> *)
+                   @ a4
+                   ds :: t WaterVolumeSolver.D1WaterGap f a4 ->
+                 GHC.Types.False) -}
+def4bbe3a0c19f0373c7a2ffa182aff2
+  $fEqWaterGap :: GHC.Classes.Eq WaterVolumeSolver.WaterGap
+  DFunId[0]
+  {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ WaterVolumeSolver.WaterGap
+                  WaterVolumeSolver.$fEqWaterGap_$c==
+                  WaterVolumeSolver.$fEqWaterGap_$c/= -}
+def4bbe3a0c19f0373c7a2ffa182aff2
+  $fEqWaterGap_$c/= ::
+    WaterVolumeSolver.WaterGap
+    -> WaterVolumeSolver.WaterGap -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SLLL),1*U(1*U(U),1*U(U),1*U(U),1*U(U))><S(SLLL),1*U(1*U(U),1*U(U),1*U(U),1*U(U))>,
+     Unfolding: InlineRule (2, True, False)
+                (\ a4 :: WaterVolumeSolver.WaterGap
+                   b :: WaterVolumeSolver.WaterGap ->
+                 case WaterVolumeSolver.$fEqWaterGap_$c== a4 b of wild {
+                   GHC.Types.False -> GHC.Types.True
+                   GHC.Types.True -> GHC.Types.False }) -}
+def4bbe3a0c19f0373c7a2ffa182aff2
+  $fEqWaterGap_$c== ::
+    WaterVolumeSolver.WaterGap
+    -> WaterVolumeSolver.WaterGap -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SLLL),1*U(1*U(U),1*U(U),1*U(U),1*U(U))><S(SLLL),1*U(1*U(U),1*U(U),1*U(U),1*U(U))>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ w :: WaterVolumeSolver.WaterGap
+                   w1 :: WaterVolumeSolver.WaterGap ->
+                 case w of ww { WaterVolumeSolver.WaterGap ww1 ww2 ww3 ww4 ->
+                 case ww1 of ww5 { GHC.Types.I# ww6 ->
+                 case w1 of ww7 { WaterVolumeSolver.WaterGap ww8 ww9 ww10 ww11 ->
+                 case ww8 of ww12 { GHC.Types.I# ww13 ->
+                 WaterVolumeSolver.$w$c==
+                   ww6
+                   ww2
+                   ww3
+                   ww4
+                   ww13
+                   ww9
+                   ww10
+                   ww11 } } } }) -}
+def4bbe3a0c19f0373c7a2ffa182aff2
+  $fGenericWaterGap ::
+    GHC.Generics.Generic WaterVolumeSolver.WaterGap
+  DFunId[0]
+  {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ WaterVolumeSolver.WaterGap
+                  WaterVolumeSolver.$fGenericWaterGap_$cfrom
+                  WaterVolumeSolver.$fGenericWaterGap_$cto -}
+def4bbe3a0c19f0373c7a2ffa182aff2
+  $fGenericWaterGap_$cfrom ::
+    WaterVolumeSolver.WaterGap
+    -> GHC.Generics.Rep WaterVolumeSolver.WaterGap x
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U(U,U,U,U)>m,
+     Unfolding: InlineRule (1, True, False)
+                (\ @ x ds :: WaterVolumeSolver.WaterGap ->
+                 case ds of wild { WaterVolumeSolver.WaterGap g1 g2 g3 g4 ->
+                 (GHC.Generics.:*:
+                    @ (GHC.Generics.M1
+                         GHC.Generics.S
+                         WaterVolumeSolver.S1_0_0WaterGap
+                         (GHC.Generics.K1 GHC.Generics.R GHC.Types.Int)
+                       GHC.Generics.:*: GHC.Generics.M1
+                                          GHC.Generics.S
+                                          WaterVolumeSolver.S1_0_1WaterGap
+                                          (GHC.Generics.K1 GHC.Generics.R GHC.Types.Int))
+                    @ (GHC.Generics.M1
+                         GHC.Generics.S
+                         WaterVolumeSolver.S1_0_2WaterGap
+                         (GHC.Generics.K1 GHC.Generics.R GHC.Types.Int)
+                       GHC.Generics.:*: GHC.Generics.M1
+                                          GHC.Generics.S
+                                          WaterVolumeSolver.S1_0_3WaterGap
+                                          (GHC.Generics.K1 GHC.Generics.R GHC.Types.Int))
+                    @ x
+                    (GHC.Generics.:*:
+                       @ (GHC.Generics.M1
+                            GHC.Generics.S
+                            WaterVolumeSolver.S1_0_0WaterGap
+                            (GHC.Generics.K1 GHC.Generics.R GHC.Types.Int))
+                       @ (GHC.Generics.M1
+                            GHC.Generics.S
+                            WaterVolumeSolver.S1_0_1WaterGap
+                            (GHC.Generics.K1 GHC.Generics.R GHC.Types.Int))
+                       @ x
+                       g1
+                         `cast`
+                       (Trans
+                            (Sym (GHC.Generics.NTCo:K1[0]
+                                      <GHC.Generics.R>_P <GHC.Types.Int>_R <x>_P))
+                            (Sym (GHC.Generics.NTCo:M1[0]
+                                      <GHC.Generics.S>_P
+                                      <WaterVolumeSolver.S1_0_0WaterGap>_P
+                                      <GHC.Generics.K1 GHC.Generics.R GHC.Types.Int>_R) <x>_N))
+                       g2
+                         `cast`
+                       (Trans
+                            (Sym (GHC.Generics.NTCo:K1[0]
+                                      <GHC.Generics.R>_P <GHC.Types.Int>_R <x>_P))
+                            (Sym (GHC.Generics.NTCo:M1[0]
+                                      <GHC.Generics.S>_P
+                                      <WaterVolumeSolver.S1_0_1WaterGap>_P
+                                      <GHC.Generics.K1 GHC.Generics.R GHC.Types.Int>_R) <x>_N)))
+                    (GHC.Generics.:*:
+                       @ (GHC.Generics.M1
+                            GHC.Generics.S
+                            WaterVolumeSolver.S1_0_2WaterGap
+                            (GHC.Generics.K1 GHC.Generics.R GHC.Types.Int))
+                       @ (GHC.Generics.M1
+                            GHC.Generics.S
+                            WaterVolumeSolver.S1_0_3WaterGap
+                            (GHC.Generics.K1 GHC.Generics.R GHC.Types.Int))
+                       @ x
+                       g3
+                         `cast`
+                       (Trans
+                            (Sym (GHC.Generics.NTCo:K1[0]
+                                      <GHC.Generics.R>_P <GHC.Types.Int>_R <x>_P))
+                            (Sym (GHC.Generics.NTCo:M1[0]
+                                      <GHC.Generics.S>_P
+                                      <WaterVolumeSolver.S1_0_2WaterGap>_P
+                                      <GHC.Generics.K1 GHC.Generics.R GHC.Types.Int>_R) <x>_N))
+                       g4
+                         `cast`
+                       (Trans
+                            (Sym (GHC.Generics.NTCo:K1[0]
+                                      <GHC.Generics.R>_P <GHC.Types.Int>_R <x>_P))
+                            (Sym (GHC.Generics.NTCo:M1[0]
+                                      <GHC.Generics.S>_P
+                                      <WaterVolumeSolver.S1_0_3WaterGap>_P
+                                      <GHC.Generics.K1 GHC.Generics.R GHC.Types.Int>_R) <x>_N))))
+                   `cast`
+                 (Trans
+                      (Sym (GHC.Generics.NTCo:M1[0]
+                                <GHC.Generics.C>_P
+                                <WaterVolumeSolver.C1_0WaterGap>_P
+                                <(GHC.Generics.M1
+                                    GHC.Generics.S
+                                    WaterVolumeSolver.S1_0_0WaterGap
+                                    (GHC.Generics.K1 GHC.Generics.R GHC.Types.Int)
+                                  GHC.Generics.:*: GHC.Generics.M1
+                                                     GHC.Generics.S
+                                                     WaterVolumeSolver.S1_0_1WaterGap
+                                                     (GHC.Generics.K1 GHC.Generics.R GHC.Types.Int))
+                                 GHC.Generics.:*: (GHC.Generics.M1
+                                                     GHC.Generics.S
+                                                     WaterVolumeSolver.S1_0_2WaterGap
+                                                     (GHC.Generics.K1 GHC.Generics.R GHC.Types.Int)
+                                                   GHC.Generics.:*: GHC.Generics.M1
+                                                                      GHC.Generics.S
+                                                                      WaterVolumeSolver.S1_0_3WaterGap
+                                                                      (GHC.Generics.K1
+                                                                         GHC.Generics.R
+                                                                         GHC.Types.Int))>_R))
+                      (Trans
+                           (Sym (GHC.Generics.NTCo:M1[0]
+                                     <GHC.Generics.D>_P
+                                     <WaterVolumeSolver.D1WaterGap>_P
+                                     <GHC.Generics.M1
+                                        GHC.Generics.C
+                                        WaterVolumeSolver.C1_0WaterGap
+                                        ((GHC.Generics.M1
+                                            GHC.Generics.S
+                                            WaterVolumeSolver.S1_0_0WaterGap
+                                            (GHC.Generics.K1 GHC.Generics.R GHC.Types.Int)
+                                          GHC.Generics.:*: GHC.Generics.M1
+                                                             GHC.Generics.S
+                                                             WaterVolumeSolver.S1_0_1WaterGap
+                                                             (GHC.Generics.K1
+                                                                GHC.Generics.R GHC.Types.Int))
+                                         GHC.Generics.:*: (GHC.Generics.M1
+                                                             GHC.Generics.S
+                                                             WaterVolumeSolver.S1_0_2WaterGap
+                                                             (GHC.Generics.K1
+                                                                GHC.Generics.R GHC.Types.Int)
+                                                           GHC.Generics.:*: GHC.Generics.M1
+                                                                              GHC.Generics.S
+                                                                              WaterVolumeSolver.S1_0_3WaterGap
+                                                                              (GHC.Generics.K1
+                                                                                 GHC.Generics.R
+                                                                                 GHC.Types.Int)))>_R))
+                           (Sub (Sym (WaterVolumeSolver.Rep_WaterGap[0])))) <x>_N) }) -}
+def4bbe3a0c19f0373c7a2ffa182aff2
+  $fGenericWaterGap_$cto ::
+    GHC.Generics.Rep WaterVolumeSolver.WaterGap x
+    -> WaterVolumeSolver.WaterGap
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(SS),1*U(1*U(U,U),1*U(U,U))>m,
+     Unfolding: InlineRule (1, True, False)
+                (\ @ x ds :: GHC.Generics.Rep WaterVolumeSolver.WaterGap x ->
+                 case ds
+                        `cast`
+                      (Trans
+                           (Sub (WaterVolumeSolver.Rep_WaterGap[0]))
+                           (Trans
+                                (GHC.Generics.NTCo:M1[0]
+                                     <GHC.Generics.D>_P
+                                     <WaterVolumeSolver.D1WaterGap>_P
+                                     <GHC.Generics.M1
+                                        GHC.Generics.C
+                                        WaterVolumeSolver.C1_0WaterGap
+                                        ((GHC.Generics.M1
+                                            GHC.Generics.S
+                                            WaterVolumeSolver.S1_0_0WaterGap
+                                            (GHC.Generics.K1 GHC.Generics.R GHC.Types.Int)
+                                          GHC.Generics.:*: GHC.Generics.M1
+                                                             GHC.Generics.S
+                                                             WaterVolumeSolver.S1_0_1WaterGap
+                                                             (GHC.Generics.K1
+                                                                GHC.Generics.R GHC.Types.Int))
+                                         GHC.Generics.:*: (GHC.Generics.M1
+                                                             GHC.Generics.S
+                                                             WaterVolumeSolver.S1_0_2WaterGap
+                                                             (GHC.Generics.K1
+                                                                GHC.Generics.R GHC.Types.Int)
+                                                           GHC.Generics.:*: GHC.Generics.M1
+                                                                              GHC.Generics.S
+                                                                              WaterVolumeSolver.S1_0_3WaterGap
+                                                                              (GHC.Generics.K1
+                                                                                 GHC.Generics.R
+                                                                                 GHC.Types.Int)))>_R)
+                                (GHC.Generics.NTCo:M1[0]
+                                     <GHC.Generics.C>_P
+                                     <WaterVolumeSolver.C1_0WaterGap>_P
+                                     <(GHC.Generics.M1
+                                         GHC.Generics.S
+                                         WaterVolumeSolver.S1_0_0WaterGap
+                                         (GHC.Generics.K1 GHC.Generics.R GHC.Types.Int)
+                                       GHC.Generics.:*: GHC.Generics.M1
+                                                          GHC.Generics.S
+                                                          WaterVolumeSolver.S1_0_1WaterGap
+                                                          (GHC.Generics.K1
+                                                             GHC.Generics.R GHC.Types.Int))
+                                      GHC.Generics.:*: (GHC.Generics.M1
+                                                          GHC.Generics.S
+                                                          WaterVolumeSolver.S1_0_2WaterGap
+                                                          (GHC.Generics.K1
+                                                             GHC.Generics.R GHC.Types.Int)
+                                                        GHC.Generics.:*: GHC.Generics.M1
+                                                                           GHC.Generics.S
+                                                                           WaterVolumeSolver.S1_0_3WaterGap
+                                                                           (GHC.Generics.K1
+                                                                              GHC.Generics.R
+                                                                              GHC.Types.Int))>_R)) <x>_N) of wild { GHC.Generics.:*: ds1 ds2 ->
+                 case ds1 of wild1 { GHC.Generics.:*: ds3 ds4 ->
+                 case ds2 of wild2 { GHC.Generics.:*: ds5 ds6 ->
+                 WaterVolumeSolver.WaterGap
+                   ds3
+                     `cast`
+                   (Trans
+                        (GHC.Generics.NTCo:M1[0]
+                             <GHC.Generics.S>_P
+                             <WaterVolumeSolver.S1_0_0WaterGap>_P
+                             <GHC.Generics.K1 GHC.Generics.R GHC.Types.Int>_R <x>_N)
+                        (GHC.Generics.NTCo:K1[0]
+                             <GHC.Generics.R>_P <GHC.Types.Int>_R <x>_P))
+                   ds4
+                     `cast`
+                   (Trans
+                        (GHC.Generics.NTCo:M1[0]
+                             <GHC.Generics.S>_P
+                             <WaterVolumeSolver.S1_0_1WaterGap>_P
+                             <GHC.Generics.K1 GHC.Generics.R GHC.Types.Int>_R <x>_N)
+                        (GHC.Generics.NTCo:K1[0]
+                             <GHC.Generics.R>_P <GHC.Types.Int>_R <x>_P))
+                   ds5
+                     `cast`
+                   (Trans
+                        (GHC.Generics.NTCo:M1[0]
+                             <GHC.Generics.S>_P
+                             <WaterVolumeSolver.S1_0_2WaterGap>_P
+                             <GHC.Generics.K1 GHC.Generics.R GHC.Types.Int>_R <x>_N)
+                        (GHC.Generics.NTCo:K1[0]
+                             <GHC.Generics.R>_P <GHC.Types.Int>_R <x>_P))
+                   ds6
+                     `cast`
+                   (Trans
+                        (GHC.Generics.NTCo:M1[0]
+                             <GHC.Generics.S>_P
+                             <WaterVolumeSolver.S1_0_3WaterGap>_P
+                             <GHC.Generics.K1 GHC.Generics.R GHC.Types.Int>_R <x>_N)
+                        (GHC.Generics.NTCo:K1[0]
+                             <GHC.Generics.R>_P <GHC.Types.Int>_R <x>_P)) } } }) -}
+def4bbe3a0c19f0373c7a2ffa182aff2
+  $fNFDataWaterGap ::
+    Control.DeepSeq.NFData WaterVolumeSolver.WaterGap
+  DFunId[0]
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(SSSS),1*U(1*H,1*H,1*H,1*H)>,
+     Inline: INLINE (sat-args=0),
+     Unfolding: InlineRule (0, False, True)
+                WaterVolumeSolver.$fNFDataWaterGap_$crnf
+                  `cast`
+                (Sym (Control.DeepSeq.NTCo:NFData[0]
+                          <WaterVolumeSolver.WaterGap>_N)) -}
+def4bbe3a0c19f0373c7a2ffa182aff2
+  $fNFDataWaterGap_$crnf :: WaterVolumeSolver.WaterGap -> ()
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(SSSS),1*U(1*H,1*H,1*H,1*H)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ eta :: WaterVolumeSolver.WaterGap ->
+                 case eta of wild { WaterVolumeSolver.WaterGap g1 g2 g3 g4 ->
+                 case g1 of tpl { GHC.Types.I# ipv ->
+                 case g2 of tpl1 { GHC.Types.I# ipv1 ->
+                 case g3 of tpl2 { GHC.Types.I# ipv2 ->
+                 case g4 of tpl3 { GHC.Types.I# ipv3 -> GHC.Tuple.() } } } } }) -}
+def4bbe3a0c19f0373c7a2ffa182aff2
+  $fOrdWaterGap :: GHC.Classes.Ord WaterVolumeSolver.WaterGap
+  DFunId[0]
+  {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ WaterVolumeSolver.WaterGap
+                  WaterVolumeSolver.$fEqWaterGap
+                  WaterVolumeSolver.$fOrdWaterGap_$ccompare
+                  WaterVolumeSolver.$fOrdWaterGap_$c<
+                  WaterVolumeSolver.$fOrdWaterGap_$c<=
+                  WaterVolumeSolver.$fOrdWaterGap_$c>
+                  WaterVolumeSolver.$fOrdWaterGap_$c>=
+                  WaterVolumeSolver.$fOrdWaterGap_$cmax
+                  WaterVolumeSolver.$fOrdWaterGap_$cmin -}
+def4bbe3a0c19f0373c7a2ffa182aff2
+  $fOrdWaterGap_$c< ::
+    WaterVolumeSolver.WaterGap
+    -> WaterVolumeSolver.WaterGap -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SLLL),1*U(1*U(U),1*U(U),1*U(U),1*U(U))><S(SLLL),1*U(1*U(U),1*U(U),1*U(U),1*U(U))>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ w :: WaterVolumeSolver.WaterGap
+                   w1 :: WaterVolumeSolver.WaterGap ->
+                 case w of ww { WaterVolumeSolver.WaterGap ww1 ww2 ww3 ww4 ->
+                 case ww1 of ww5 { GHC.Types.I# ww6 ->
+                 case w1 of ww7 { WaterVolumeSolver.WaterGap ww8 ww9 ww10 ww11 ->
+                 case ww8 of ww12 { GHC.Types.I# ww13 ->
+                 WaterVolumeSolver.$w$c<
+                   ww6
+                   ww2
+                   ww3
+                   ww4
+                   ww13
+                   ww9
+                   ww10
+                   ww11 } } } }) -}
+def4bbe3a0c19f0373c7a2ffa182aff2
+  $fOrdWaterGap_$c<= ::
+    WaterVolumeSolver.WaterGap
+    -> WaterVolumeSolver.WaterGap -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SLLL),1*U(1*U(U),1*U(U),1*U(U),1*U(U))><S(SLLL),1*U(1*U(U),1*U(U),1*U(U),1*U(U))>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ w :: WaterVolumeSolver.WaterGap
+                   w1 :: WaterVolumeSolver.WaterGap ->
+                 case w of ww { WaterVolumeSolver.WaterGap ww1 ww2 ww3 ww4 ->
+                 case ww1 of ww5 { GHC.Types.I# ww6 ->
+                 case w1 of ww7 { WaterVolumeSolver.WaterGap ww8 ww9 ww10 ww11 ->
+                 case ww8 of ww12 { GHC.Types.I# ww13 ->
+                 WaterVolumeSolver.$w$c<=
+                   ww6
+                   ww2
+                   ww3
+                   ww4
+                   ww13
+                   ww9
+                   ww10
+                   ww11 } } } }) -}
+def4bbe3a0c19f0373c7a2ffa182aff2
+  $fOrdWaterGap_$c> ::
+    WaterVolumeSolver.WaterGap
+    -> WaterVolumeSolver.WaterGap -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SLLL),1*U(1*U(U),1*U(U),1*U(U),1*U(U))><S(SLLL),1*U(1*U(U),1*U(U),1*U(U),1*U(U))>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ w :: WaterVolumeSolver.WaterGap
+                   w1 :: WaterVolumeSolver.WaterGap ->
+                 case w of ww { WaterVolumeSolver.WaterGap ww1 ww2 ww3 ww4 ->
+                 case ww1 of ww5 { GHC.Types.I# ww6 ->
+                 case w1 of ww7 { WaterVolumeSolver.WaterGap ww8 ww9 ww10 ww11 ->
+                 case ww8 of ww12 { GHC.Types.I# ww13 ->
+                 WaterVolumeSolver.$w$c>
+                   ww6
+                   ww2
+                   ww3
+                   ww4
+                   ww13
+                   ww9
+                   ww10
+                   ww11 } } } }) -}
+def4bbe3a0c19f0373c7a2ffa182aff2
+  $fOrdWaterGap_$c>= ::
+    WaterVolumeSolver.WaterGap
+    -> WaterVolumeSolver.WaterGap -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SLLL),1*U(1*U(U),1*U(U),1*U(U),1*U(U))><S(SLLL),1*U(1*U(U),1*U(U),1*U(U),1*U(U))>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ w :: WaterVolumeSolver.WaterGap
+                   w1 :: WaterVolumeSolver.WaterGap ->
+                 case w of ww { WaterVolumeSolver.WaterGap ww1 ww2 ww3 ww4 ->
+                 case ww1 of ww5 { GHC.Types.I# ww6 ->
+                 case w1 of ww7 { WaterVolumeSolver.WaterGap ww8 ww9 ww10 ww11 ->
+                 case ww8 of ww12 { GHC.Types.I# ww13 ->
+                 WaterVolumeSolver.$w$c>=
+                   ww6
+                   ww2
+                   ww3
+                   ww4
+                   ww13
+                   ww9
+                   ww10
+                   ww11 } } } }) -}
+def4bbe3a0c19f0373c7a2ffa182aff2
+  $fOrdWaterGap_$ccompare ::
+    WaterVolumeSolver.WaterGap
+    -> WaterVolumeSolver.WaterGap -> GHC.Types.Ordering
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SLLL),1*U(1*U(U),1*U(U),1*U(U),1*U(U))><S(SLLL),1*U(1*U(U),1*U(U),1*U(U),1*U(U))>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ w :: WaterVolumeSolver.WaterGap
+                   w1 :: WaterVolumeSolver.WaterGap ->
+                 case w of ww { WaterVolumeSolver.WaterGap ww1 ww2 ww3 ww4 ->
+                 case ww1 of ww5 { GHC.Types.I# ww6 ->
+                 case w1 of ww7 { WaterVolumeSolver.WaterGap ww8 ww9 ww10 ww11 ->
+                 case ww8 of ww12 { GHC.Types.I# ww13 ->
+                 WaterVolumeSolver.$w$ccompare
+                   ww6
+                   ww2
+                   ww3
+                   ww4
+                   ww13
+                   ww9
+                   ww10
+                   ww11 } } } }) -}
+def4bbe3a0c19f0373c7a2ffa182aff2
+  $fOrdWaterGap_$cmax ::
+    WaterVolumeSolver.WaterGap
+    -> WaterVolumeSolver.WaterGap -> WaterVolumeSolver.WaterGap
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SLLL),U(U(U),U(U),U(U),U(U))><S(SLLL),U(U(U),U(U),U(U),U(U))>m,
+     Unfolding: InlineRule (2, True, False)
+                (\ x :: WaterVolumeSolver.WaterGap
+                   y :: WaterVolumeSolver.WaterGap ->
+                 case WaterVolumeSolver.$fOrdWaterGap_$c<= x y of wild {
+                   GHC.Types.False -> x GHC.Types.True -> y }) -}
+def4bbe3a0c19f0373c7a2ffa182aff2
+  $fOrdWaterGap_$cmin ::
+    WaterVolumeSolver.WaterGap
+    -> WaterVolumeSolver.WaterGap -> WaterVolumeSolver.WaterGap
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SLLL),U(U(U),U(U),U(U),U(U))><S(SLLL),U(U(U),U(U),U(U),U(U))>m,
+     Unfolding: InlineRule (2, True, False)
+                (\ x :: WaterVolumeSolver.WaterGap
+                   y :: WaterVolumeSolver.WaterGap ->
+                 case WaterVolumeSolver.$fOrdWaterGap_$c<= x y of wild {
+                   GHC.Types.False -> y GHC.Types.True -> x }) -}
+e7ef26a37e4afcbff2296045f4ecbd18
+  $fSelectorWaterGap ::
+    GHC.Generics.Selector WaterVolumeSolver.S1_0_0WaterGap
+  DFunId[0]
+  {- Arity: 1, Strictness: <L,A>, Inline: INLINE (sat-args=0),
+     Unfolding: InlineRule (0, False, True)
+                WaterVolumeSolver.$fSelectorWaterGap_$cselName
+                  `cast`
+                (Sym (GHC.Generics.NTCo:Selector[0]
+                          <WaterVolumeSolver.S1_0_0WaterGap>_N)) -}
+d7519c7b093fd2000c40f4da7e95ba1c
+  $fSelectorWaterGap0 ::
+    GHC.Generics.Selector WaterVolumeSolver.S1_0_1WaterGap
+  DFunId[0]
+  {- Arity: 1, Strictness: <L,A>, Inline: INLINE (sat-args=0),
+     Unfolding: InlineRule (0, False, True)
+                WaterVolumeSolver.$fSelectorWaterGap0_$cselName
+                  `cast`
+                (Sym (GHC.Generics.NTCo:Selector[0]
+                          <WaterVolumeSolver.S1_0_1WaterGap>_N)) -}
+d7519c7b093fd2000c40f4da7e95ba1c
+  $fSelectorWaterGap0_$cselName ::
+    t WaterVolumeSolver.S1_0_1WaterGap f a -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,A>,
+     Unfolding: InlineRule (1, True, True)
+                (\ @ (t :: * -> (* -> *) -> * -> *)
+                   @ (f :: * -> *)
+                   @ a4
+                   ds :: t WaterVolumeSolver.S1_0_1WaterGap f a4 ->
+                 WaterVolumeSolver.$fSelectorWaterGap5) -}
+c8ccca71117d1eef8277c7061d0f2f85
+  $fSelectorWaterGap1 ::
+    GHC.Generics.Selector WaterVolumeSolver.S1_0_2WaterGap
+  DFunId[0]
+  {- Arity: 1, Strictness: <L,A>, Inline: INLINE (sat-args=0),
+     Unfolding: InlineRule (0, False, True)
+                WaterVolumeSolver.$fSelectorWaterGap1_$cselName
+                  `cast`
+                (Sym (GHC.Generics.NTCo:Selector[0]
+                          <WaterVolumeSolver.S1_0_2WaterGap>_N)) -}
+c8ccca71117d1eef8277c7061d0f2f85
+  $fSelectorWaterGap1_$cselName ::
+    t WaterVolumeSolver.S1_0_2WaterGap f a -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,A>,
+     Unfolding: InlineRule (1, True, True)
+                (\ @ (t :: * -> (* -> *) -> * -> *)
+                   @ (f :: * -> *)
+                   @ a4
+                   ds :: t WaterVolumeSolver.S1_0_2WaterGap f a4 ->
+                 WaterVolumeSolver.$fSelectorWaterGap6) -}
+def4bbe3a0c19f0373c7a2ffa182aff2
+  $fSelectorWaterGap2 ::
+    GHC.Generics.Selector WaterVolumeSolver.S1_0_3WaterGap
+  DFunId[0]
+  {- Arity: 1, Strictness: <L,A>, Inline: INLINE (sat-args=0),
+     Unfolding: InlineRule (0, False, True)
+                WaterVolumeSolver.$fSelectorWaterGap2_$cselName
+                  `cast`
+                (Sym (GHC.Generics.NTCo:Selector[0]
+                          <WaterVolumeSolver.S1_0_3WaterGap>_N)) -}
+def4bbe3a0c19f0373c7a2ffa182aff2
+  $fSelectorWaterGap2_$cselName ::
+    t WaterVolumeSolver.S1_0_3WaterGap f a -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,A>,
+     Unfolding: InlineRule (1, True, True)
+                (\ @ (t :: * -> (* -> *) -> * -> *)
+                   @ (f :: * -> *)
+                   @ a4
+                   ds :: t WaterVolumeSolver.S1_0_3WaterGap f a4 ->
+                 WaterVolumeSolver.$fSelectorWaterGap7) -}
+c5a6d03a4d242d4098d0a0b01861899b
+  $fSelectorWaterGap4 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "_left"#) -}
+61af6d6e792916dfe741dff29e236c39
+  $fSelectorWaterGap5 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "_blockSum"#) -}
+0120bfb3d91adecb9258c536259d753b
+  $fSelectorWaterGap6 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "_blocks"#) -}
+5f03716fd13fa61269ff76fd6a080be8
+  $fSelectorWaterGap7 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "_right"#) -}
+e7ef26a37e4afcbff2296045f4ecbd18
+  $fSelectorWaterGap_$cselName ::
+    t WaterVolumeSolver.S1_0_0WaterGap f a -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,A>,
+     Unfolding: InlineRule (1, True, True)
+                (\ @ (t :: * -> (* -> *) -> * -> *)
+                   @ (f :: * -> *)
+                   @ a4
+                   ds :: t WaterVolumeSolver.S1_0_0WaterGap f a4 ->
+                 WaterVolumeSolver.$fSelectorWaterGap4) -}
+def4bbe3a0c19f0373c7a2ffa182aff2
+  $fShowWaterGap :: GHC.Show.Show WaterVolumeSolver.WaterGap
+  DFunId[0]
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ WaterVolumeSolver.WaterGap
+                  WaterVolumeSolver.$fShowWaterGap_$cshowsPrec
+                  WaterVolumeSolver.$fShowWaterGap_$cshow
+                  WaterVolumeSolver.$fShowWaterGap_$cshowList -}
+def4bbe3a0c19f0373c7a2ffa182aff2
+  $fShowWaterGap1 :: WaterVolumeSolver.WaterGap -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (\ w :: WaterVolumeSolver.WaterGap
+                   w1 :: GHC.Base.String ->
+                 case w of ww { WaterVolumeSolver.WaterGap ww1 ww2 ww3 ww4 ->
+                 WaterVolumeSolver.$w$cshowsPrec 0 ww1 ww2 ww3 ww4 w1 }) -}
+8b852adaaf0d641c3ee1a9c2a2960730
+  $fShowWaterGap2 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "WaterGap {"#) -}
+fc11fe7c4e3a1ba64bc21c56c2671e0c
+  $fShowWaterGap3 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "}"#) -}
+b178b9b93dad1b691536a3269d913656
+  $fShowWaterGap4 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "_right = "#) -}
+3800a6f1b953d9b15be6c2d89f957e01
+  $fShowWaterGap5 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "_blocks = "#) -}
+02b001a91a625a36fda22e24e9bc4bce
+  $fShowWaterGap6 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "_blockSum = "#) -}
+9013e7dde7c2b68af94c78f62fcabe2d
+  $fShowWaterGap7 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# ", "#) -}
+87b045359ae52c709c035f05c9fb988d
+  $fShowWaterGap8 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "_left = "#) -}
+def4bbe3a0c19f0373c7a2ffa182aff2
+  $fShowWaterGap_$cshow ::
+    WaterVolumeSolver.WaterGap -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U(1*U(U),1*U(U),1*U(U),1*U(U))>,
+     Unfolding: InlineRule (1, True, False)
+                (\ x :: WaterVolumeSolver.WaterGap ->
+                 WaterVolumeSolver.$fShowWaterGap_$cshowsPrec
+                   GHC.Show.shows18
+                   x
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+def4bbe3a0c19f0373c7a2ffa182aff2
+  $fShowWaterGap_$cshowList ::
+    [WaterVolumeSolver.WaterGap] -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (GHC.Show.showList__
+                   @ WaterVolumeSolver.WaterGap
+                   WaterVolumeSolver.$fShowWaterGap1) -}
+def4bbe3a0c19f0373c7a2ffa182aff2
+  $fShowWaterGap_$cshowsPrec ::
+    GHC.Types.Int -> WaterVolumeSolver.WaterGap -> GHC.Show.ShowS
+  {- Arity: 3,
+     Strictness: <S,1*U(U)><S,1*U(1*U(U),1*U(U),1*U(U),1*U(U))><L,U>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (3, True, False)
+                (\ w :: GHC.Types.Int
+                   w1 :: WaterVolumeSolver.WaterGap
+                   w2 :: GHC.Base.String ->
+                 case w of ww { GHC.Types.I# ww1 ->
+                 case w1 of ww2 { WaterVolumeSolver.WaterGap ww3 ww4 ww5 ww6 ->
+                 WaterVolumeSolver.$w$cshowsPrec ww1 ww3 ww4 ww5 ww6 w2 } }) -}
+a71de7a049bc9f2584ac5e229b8c8362
+  $w$c< ::
+    GHC.Prim.Int#
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Prim.Int#
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Types.Bool
+  {- Arity: 8, HasNoCafRefs,
+     Strictness: <L,U><L,1*U(U)><L,1*U(U)><L,1*U(U)><L,U><L,1*U(U)><L,1*U(U)><L,1*U(U)>,
+     Inline: [0],
+     Unfolding: (\ ww :: GHC.Prim.Int#
+                   ww1 :: GHC.Types.Int
+                   ww2 :: GHC.Types.Int
+                   ww3 :: GHC.Types.Int
+                   ww4 :: GHC.Prim.Int#
+                   ww5 :: GHC.Types.Int
+                   ww6 :: GHC.Types.Int
+                   ww7 :: GHC.Types.Int ->
+                 case GHC.Prim.tagToEnum#
+                        @ GHC.Types.Bool
+                        (GHC.Prim.<# ww ww4) of wild {
+                   GHC.Types.False
+                   -> case GHC.Prim.tagToEnum#
+                             @ GHC.Types.Bool
+                             (GHC.Prim.==# ww ww4) of wild1 {
+                        GHC.Types.False -> GHC.Types.False
+                        GHC.Types.True
+                        -> case ww1 of wild2 { GHC.Types.I# x# ->
+                           case ww5 of wild3 { GHC.Types.I# y# ->
+                           case GHC.Prim.tagToEnum#
+                                  @ GHC.Types.Bool
+                                  (GHC.Prim.<# x# y#) of wild4 {
+                             GHC.Types.False
+                             -> case GHC.Prim.tagToEnum#
+                                       @ GHC.Types.Bool
+                                       (GHC.Prim.==# x# y#) of wild5 {
+                                  GHC.Types.False -> GHC.Types.False
+                                  GHC.Types.True
+                                  -> case ww2 of wild6 { GHC.Types.I# x#1 ->
+                                     case ww6 of wild7 { GHC.Types.I# y#1 ->
+                                     case GHC.Prim.tagToEnum#
+                                            @ GHC.Types.Bool
+                                            (GHC.Prim.<# x#1 y#1) of wild8 {
+                                       GHC.Types.False
+                                       -> case GHC.Prim.tagToEnum#
+                                                 @ GHC.Types.Bool
+                                                 (GHC.Prim.==# x#1 y#1) of wild9 {
+                                            GHC.Types.False -> GHC.Types.False
+                                            GHC.Types.True -> GHC.Classes.ltInt ww3 ww7 }
+                                       GHC.Types.True -> GHC.Types.True } } } }
+                             GHC.Types.True -> GHC.Types.True } } } }
+                   GHC.Types.True -> GHC.Types.True }) -}
+afaf715cfe5aba3a5c44e1c35aa19638
+  $w$c<= ::
+    GHC.Prim.Int#
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Prim.Int#
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Types.Bool
+  {- Arity: 8, HasNoCafRefs,
+     Strictness: <L,U><L,1*U(U)><L,1*U(U)><L,1*U(U)><L,U><L,1*U(U)><L,1*U(U)><L,1*U(U)>,
+     Inline: [0],
+     Unfolding: (\ ww :: GHC.Prim.Int#
+                   ww1 :: GHC.Types.Int
+                   ww2 :: GHC.Types.Int
+                   ww3 :: GHC.Types.Int
+                   ww4 :: GHC.Prim.Int#
+                   ww5 :: GHC.Types.Int
+                   ww6 :: GHC.Types.Int
+                   ww7 :: GHC.Types.Int ->
+                 case GHC.Prim.tagToEnum#
+                        @ GHC.Types.Bool
+                        (GHC.Prim.<# ww ww4) of wild {
+                   GHC.Types.False
+                   -> case GHC.Prim.tagToEnum#
+                             @ GHC.Types.Bool
+                             (GHC.Prim.==# ww ww4) of wild1 {
+                        GHC.Types.False -> GHC.Types.False
+                        GHC.Types.True
+                        -> case ww1 of wild2 { GHC.Types.I# x# ->
+                           case ww5 of wild3 { GHC.Types.I# y# ->
+                           case GHC.Prim.tagToEnum#
+                                  @ GHC.Types.Bool
+                                  (GHC.Prim.<# x# y#) of wild4 {
+                             GHC.Types.False
+                             -> case GHC.Prim.tagToEnum#
+                                       @ GHC.Types.Bool
+                                       (GHC.Prim.==# x# y#) of wild5 {
+                                  GHC.Types.False -> GHC.Types.False
+                                  GHC.Types.True
+                                  -> case ww2 of wild6 { GHC.Types.I# x#1 ->
+                                     case ww6 of wild7 { GHC.Types.I# y#1 ->
+                                     case GHC.Prim.tagToEnum#
+                                            @ GHC.Types.Bool
+                                            (GHC.Prim.<# x#1 y#1) of wild8 {
+                                       GHC.Types.False
+                                       -> case GHC.Prim.tagToEnum#
+                                                 @ GHC.Types.Bool
+                                                 (GHC.Prim.==# x#1 y#1) of wild9 {
+                                            GHC.Types.False -> GHC.Types.False
+                                            GHC.Types.True -> GHC.Classes.leInt ww3 ww7 }
+                                       GHC.Types.True -> GHC.Types.True } } } }
+                             GHC.Types.True -> GHC.Types.True } } } }
+                   GHC.Types.True -> GHC.Types.True }) -}
+72aa41cbd1b5403b721a01cf7c217e4c
+  $w$c== ::
+    GHC.Prim.Int#
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Prim.Int#
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Types.Bool
+  {- Arity: 8, HasNoCafRefs,
+     Strictness: <L,U><L,1*U(U)><L,1*U(U)><L,1*U(U)><L,U><L,1*U(U)><L,1*U(U)><L,1*U(U)>,
+     Inline: [0],
+     Unfolding: (\ ww :: GHC.Prim.Int#
+                   ww1 :: GHC.Types.Int
+                   ww2 :: GHC.Types.Int
+                   ww3 :: GHC.Types.Int
+                   ww4 :: GHC.Prim.Int#
+                   ww5 :: GHC.Types.Int
+                   ww6 :: GHC.Types.Int
+                   ww7 :: GHC.Types.Int ->
+                 case GHC.Prim.tagToEnum#
+                        @ GHC.Types.Bool
+                        (GHC.Prim.==# ww ww4) of wild {
+                   GHC.Types.False -> GHC.Types.False
+                   GHC.Types.True
+                   -> case ww1 of wild1 { GHC.Types.I# x ->
+                      case ww5 of wild2 { GHC.Types.I# y ->
+                      case GHC.Prim.tagToEnum#
+                             @ GHC.Types.Bool
+                             (GHC.Prim.==# x y) of wild3 {
+                        GHC.Types.False -> GHC.Types.False
+                        GHC.Types.True
+                        -> case ww2 of wild4 { GHC.Types.I# x1 ->
+                           case ww6 of wild5 { GHC.Types.I# y1 ->
+                           case GHC.Prim.tagToEnum#
+                                  @ GHC.Types.Bool
+                                  (GHC.Prim.==# x1 y1) of wild6 {
+                             GHC.Types.False -> GHC.Types.False
+                             GHC.Types.True -> GHC.Classes.eqInt ww3 ww7 } } } } } } }) -}
+bbeefae4607ca443141d66f2d153a573
+  $w$c> ::
+    GHC.Prim.Int#
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Prim.Int#
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Types.Bool
+  {- Arity: 8, HasNoCafRefs,
+     Strictness: <L,U><L,1*U(U)><L,1*U(U)><L,1*U(U)><L,U><L,1*U(U)><L,1*U(U)><L,1*U(U)>,
+     Inline: [0],
+     Unfolding: (\ ww :: GHC.Prim.Int#
+                   ww1 :: GHC.Types.Int
+                   ww2 :: GHC.Types.Int
+                   ww3 :: GHC.Types.Int
+                   ww4 :: GHC.Prim.Int#
+                   ww5 :: GHC.Types.Int
+                   ww6 :: GHC.Types.Int
+                   ww7 :: GHC.Types.Int ->
+                 case GHC.Prim.tagToEnum#
+                        @ GHC.Types.Bool
+                        (GHC.Prim.<# ww ww4) of wild {
+                   GHC.Types.False
+                   -> case GHC.Prim.tagToEnum#
+                             @ GHC.Types.Bool
+                             (GHC.Prim.==# ww ww4) of wild1 {
+                        GHC.Types.False -> GHC.Types.True
+                        GHC.Types.True
+                        -> case ww1 of wild2 { GHC.Types.I# x# ->
+                           case ww5 of wild3 { GHC.Types.I# y# ->
+                           case GHC.Prim.tagToEnum#
+                                  @ GHC.Types.Bool
+                                  (GHC.Prim.<# x# y#) of wild4 {
+                             GHC.Types.False
+                             -> case GHC.Prim.tagToEnum#
+                                       @ GHC.Types.Bool
+                                       (GHC.Prim.==# x# y#) of wild5 {
+                                  GHC.Types.False -> GHC.Types.True
+                                  GHC.Types.True
+                                  -> case ww2 of wild6 { GHC.Types.I# x#1 ->
+                                     case ww6 of wild7 { GHC.Types.I# y#1 ->
+                                     case GHC.Prim.tagToEnum#
+                                            @ GHC.Types.Bool
+                                            (GHC.Prim.<# x#1 y#1) of wild8 {
+                                       GHC.Types.False
+                                       -> case GHC.Prim.tagToEnum#
+                                                 @ GHC.Types.Bool
+                                                 (GHC.Prim.==# x#1 y#1) of wild9 {
+                                            GHC.Types.False -> GHC.Types.True
+                                            GHC.Types.True -> GHC.Classes.gtInt ww3 ww7 }
+                                       GHC.Types.True -> GHC.Types.False } } } }
+                             GHC.Types.True -> GHC.Types.False } } } }
+                   GHC.Types.True -> GHC.Types.False }) -}
+9fd519f5cd9770723a410b1b86e62752
+  $w$c>= ::
+    GHC.Prim.Int#
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Prim.Int#
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Types.Bool
+  {- Arity: 8, HasNoCafRefs,
+     Strictness: <L,U><L,1*U(U)><L,1*U(U)><L,1*U(U)><L,U><L,1*U(U)><L,1*U(U)><L,1*U(U)>,
+     Inline: [0],
+     Unfolding: (\ ww :: GHC.Prim.Int#
+                   ww1 :: GHC.Types.Int
+                   ww2 :: GHC.Types.Int
+                   ww3 :: GHC.Types.Int
+                   ww4 :: GHC.Prim.Int#
+                   ww5 :: GHC.Types.Int
+                   ww6 :: GHC.Types.Int
+                   ww7 :: GHC.Types.Int ->
+                 case GHC.Prim.tagToEnum#
+                        @ GHC.Types.Bool
+                        (GHC.Prim.<# ww ww4) of wild {
+                   GHC.Types.False
+                   -> case GHC.Prim.tagToEnum#
+                             @ GHC.Types.Bool
+                             (GHC.Prim.==# ww ww4) of wild1 {
+                        GHC.Types.False -> GHC.Types.True
+                        GHC.Types.True
+                        -> case ww1 of wild2 { GHC.Types.I# x# ->
+                           case ww5 of wild3 { GHC.Types.I# y# ->
+                           case GHC.Prim.tagToEnum#
+                                  @ GHC.Types.Bool
+                                  (GHC.Prim.<# x# y#) of wild4 {
+                             GHC.Types.False
+                             -> case GHC.Prim.tagToEnum#
+                                       @ GHC.Types.Bool
+                                       (GHC.Prim.==# x# y#) of wild5 {
+                                  GHC.Types.False -> GHC.Types.True
+                                  GHC.Types.True
+                                  -> case ww2 of wild6 { GHC.Types.I# x#1 ->
+                                     case ww6 of wild7 { GHC.Types.I# y#1 ->
+                                     case GHC.Prim.tagToEnum#
+                                            @ GHC.Types.Bool
+                                            (GHC.Prim.<# x#1 y#1) of wild8 {
+                                       GHC.Types.False
+                                       -> case GHC.Prim.tagToEnum#
+                                                 @ GHC.Types.Bool
+                                                 (GHC.Prim.==# x#1 y#1) of wild9 {
+                                            GHC.Types.False -> GHC.Types.True
+                                            GHC.Types.True -> GHC.Classes.geInt ww3 ww7 }
+                                       GHC.Types.True -> GHC.Types.False } } } }
+                             GHC.Types.True -> GHC.Types.False } } } }
+                   GHC.Types.True -> GHC.Types.False }) -}
+fea3bfcadfbafcceb535167c5ce26d76
+  $w$ccompare ::
+    GHC.Prim.Int#
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Prim.Int#
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Types.Ordering
+  {- Arity: 8, HasNoCafRefs,
+     Strictness: <L,U><L,1*U(U)><L,1*U(U)><L,1*U(U)><L,U><L,1*U(U)><L,1*U(U)><L,1*U(U)>,
+     Inline: [0],
+     Unfolding: (\ ww :: GHC.Prim.Int#
+                   ww1 :: GHC.Types.Int
+                   ww2 :: GHC.Types.Int
+                   ww3 :: GHC.Types.Int
+                   ww4 :: GHC.Prim.Int#
+                   ww5 :: GHC.Types.Int
+                   ww6 :: GHC.Types.Int
+                   ww7 :: GHC.Types.Int ->
+                 case GHC.Prim.tagToEnum#
+                        @ GHC.Types.Bool
+                        (GHC.Prim.<# ww ww4) of wild {
+                   GHC.Types.False
+                   -> case GHC.Prim.tagToEnum#
+                             @ GHC.Types.Bool
+                             (GHC.Prim.==# ww ww4) of wild1 {
+                        GHC.Types.False -> GHC.Types.GT
+                        GHC.Types.True
+                        -> case ww1 of wild2 { GHC.Types.I# x# ->
+                           case ww5 of wild3 { GHC.Types.I# y# ->
+                           case GHC.Prim.tagToEnum#
+                                  @ GHC.Types.Bool
+                                  (GHC.Prim.<# x# y#) of wild4 {
+                             GHC.Types.False
+                             -> case GHC.Prim.tagToEnum#
+                                       @ GHC.Types.Bool
+                                       (GHC.Prim.==# x# y#) of wild5 {
+                                  GHC.Types.False -> GHC.Types.GT
+                                  GHC.Types.True
+                                  -> case ww2 of wild6 { GHC.Types.I# x#1 ->
+                                     case ww6 of wild7 { GHC.Types.I# y#1 ->
+                                     case GHC.Prim.tagToEnum#
+                                            @ GHC.Types.Bool
+                                            (GHC.Prim.<# x#1 y#1) of wild8 {
+                                       GHC.Types.False
+                                       -> case GHC.Prim.tagToEnum#
+                                                 @ GHC.Types.Bool
+                                                 (GHC.Prim.==# x#1 y#1) of wild9 {
+                                            GHC.Types.False -> GHC.Types.GT
+                                            GHC.Types.True -> GHC.Classes.compareInt ww3 ww7 }
+                                       GHC.Types.True -> GHC.Types.LT } } } }
+                             GHC.Types.True -> GHC.Types.LT } } } }
+                   GHC.Types.True -> GHC.Types.LT }) -}
+529737f595da583ffc93b2e7ed677708
+  $w$cshowsPrec ::
+    GHC.Prim.Int#
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Base.String
+    -> GHC.Base.String
+  {- Arity: 6,
+     Strictness: <L,U><L,1*U(U)><L,1*U(U)><L,1*U(U)><L,1*U(U)><L,U>,
+     Inline: [0],
+     Unfolding: (\ ww :: GHC.Prim.Int#
+                   ww1 :: GHC.Types.Int
+                   ww2 :: GHC.Types.Int
+                   ww3 :: GHC.Types.Int
+                   ww4 :: GHC.Types.Int
+                   w :: GHC.Base.String ->
+                 let {
+                   g :: GHC.Base.String -> GHC.Base.String
+                     {- Arity: 1, Strictness: <L,1*U> -}
+                   = \ x :: GHC.Base.String[OneShot] ->
+                     GHC.Base.++
+                       @ GHC.Types.Char
+                       WaterVolumeSolver.$fShowWaterGap8
+                       (case ww1 of ww5 { GHC.Types.I# ww6 ->
+                        case GHC.Show.$wshowSignedInt
+                               0
+                               ww6
+                               (GHC.Base.++
+                                  @ GHC.Types.Char
+                                  WaterVolumeSolver.$fShowWaterGap7
+                                  (GHC.Base.++
+                                     @ GHC.Types.Char
+                                     WaterVolumeSolver.$fShowWaterGap6
+                                     (case ww2 of ww7 { GHC.Types.I# ww8 ->
+                                      case GHC.Show.$wshowSignedInt
+                                             0
+                                             ww8
+                                             (GHC.Base.++
+                                                @ GHC.Types.Char
+                                                WaterVolumeSolver.$fShowWaterGap7
+                                                (GHC.Base.++
+                                                   @ GHC.Types.Char
+                                                   WaterVolumeSolver.$fShowWaterGap5
+                                                   (case ww3 of ww9 { GHC.Types.I# ww10 ->
+                                                    case GHC.Show.$wshowSignedInt
+                                                           0
+                                                           ww10
+                                                           (GHC.Base.++
+                                                              @ GHC.Types.Char
+                                                              WaterVolumeSolver.$fShowWaterGap7
+                                                              (GHC.Base.++
+                                                                 @ GHC.Types.Char
+                                                                 WaterVolumeSolver.$fShowWaterGap4
+                                                                 (case ww4 of ww11 { GHC.Types.I# ww12 ->
+                                                                  case GHC.Show.$wshowSignedInt
+                                                                         0
+                                                                         ww12
+                                                                         (GHC.Base.++
+                                                                            @ GHC.Types.Char
+                                                                            WaterVolumeSolver.$fShowWaterGap3
+                                                                            x) of ww13 { (#,#) ww14 ww15 ->
+                                                                  GHC.Types.:
+                                                                    @ GHC.Types.Char
+                                                                    ww14
+                                                                    ww15 } }))) of ww11 { (#,#) ww12 ww13 ->
+                                                    GHC.Types.:
+                                                      @ GHC.Types.Char
+                                                      ww12
+                                                      ww13 } }))) of ww9 { (#,#) ww10 ww11 ->
+                                      GHC.Types.:
+                                        @ GHC.Types.Char
+                                        ww10
+                                        ww11 } }))) of ww7 { (#,#) ww8 ww9 ->
+                        GHC.Types.: @ GHC.Types.Char ww8 ww9 } })
+                 } in
+                 case GHC.Prim.tagToEnum#
+                        @ GHC.Types.Bool
+                        (GHC.Prim.>=# ww 11) of wild {
+                   GHC.Types.False
+                   -> GHC.Base.++
+                        @ GHC.Types.Char
+                        WaterVolumeSolver.$fShowWaterGap2
+                        (g w)
+                   GHC.Types.True
+                   -> GHC.Types.:
+                        @ GHC.Types.Char
+                        GHC.Show.shows9
+                        (GHC.Base.++
+                           @ GHC.Types.Char
+                           WaterVolumeSolver.$fShowWaterGap2
+                           (g (GHC.Types.: @ GHC.Types.Char GHC.Show.shows8 w))) }) -}
+ba86dbf543a916a571ab3bc1d9b4a3c6
+  $wblVolDown ::
+    WaterVolumeSolver.WaterGaps -> (# GHC.Types.Int, GHC.Types.Int #)
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>, Inline: [0] -}
+96de90fb666c9ed40320f16740c7fe23
+  $wblVolUp ::
+    WaterVolumeSolver.WaterGaps -> (# GHC.Types.Int, GHC.Types.Int #)
+  {- Arity: 1, Strictness: <S,1*U>, Inline: [0] -}
+9baad57709636ec867eee8cb0a877b69
+  $wmerge ::
+    WaterVolumeSolver.WaterGaps
+    -> WaterVolumeSolver.WaterGaps
+    -> WaterVolumeSolver.WaterGaps
+    -> WaterVolumeSolver.WaterGaps
+    -> (# WaterVolumeSolver.WaterGaps, WaterVolumeSolver.WaterGaps #)
+  {- Arity: 4, Strictness: <L,U><S,U><S,U><L,U>, Inline: [0] -}
+4e660835c09288907bd3a822a44b1cf1
+  $wmergeLeftSingle ::
+    WaterVolumeSolver.WaterGaps
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> WaterVolumeSolver.WaterGaps
+  {- Arity: 4, Strictness: <S,1*U><L,U><L,U><L,U>, Inline: [0],
+     Unfolding: (\ w :: WaterVolumeSolver.WaterGaps
+                   ww :: GHC.Types.Int
+                   ww1 :: GHC.Types.Int
+                   w1 :: GHC.Types.Int ->
+                 case Data.Sequence.viewl @ WaterVolumeSolver.WaterGap w of wild {
+                   Data.Sequence.EmptyL -> WaterVolumeSolver.mergeLeft1
+                   Data.Sequence.:< d ds
+                   -> (Data.Sequence.<|_$sconsTree
+                         @ WaterVolumeSolver.WaterGap
+                         d `cast`
+                         (Sym (Data.Sequence.NTCo:Elem[0] <WaterVolumeSolver.WaterGap>_R))
+                         (Data.Sequence.Single
+                            @ (Data.Sequence.Elem WaterVolumeSolver.WaterGap)
+                            (WaterVolumeSolver.WaterGap
+                               (case d of wild1 { WaterVolumeSolver.WaterGap ds1 ds2 ds3 ds4 ->
+                                ds4 })
+                               ww
+                               ww1
+                               w1)
+                              `cast`
+                            (Sym (Data.Sequence.NTCo:Elem[0] <WaterVolumeSolver.WaterGap>_R))))
+                        `cast`
+                      (Sym (Data.Sequence.NTCo:Seq[0]
+                                <WaterVolumeSolver.WaterGap>_R)) }) -}
+b4436bfdc4e0ce3ead92811dc4559ae2
+  $wsolve ::
+    [GHC.Types.Int]
+    -> (# WaterVolumeSolver.WaterGaps, WaterVolumeSolver.WaterGaps #)
+  {- Arity: 1, Strictness: <S,1*U>, Inline: [0],
+     Unfolding: (\ w :: [GHC.Types.Int] ->
+                 case w of wild {
+                   []
+                   -> case WaterVolumeSolver.solve1
+                      ret_ty (# WaterVolumeSolver.WaterGaps,
+                                WaterVolumeSolver.WaterGaps #)
+                      of {}
+                   : x xs
+                   -> WaterVolumeSolver.$wsolve'
+                        xs
+                        (Data.Sequence.Single
+                           @ (Data.Sequence.Elem WaterVolumeSolver.WaterGap)
+                           (WaterVolumeSolver.WaterGap
+                              GHC.Base.minInt
+                              WaterVolumeSolver.maxWGap2
+                              WaterVolumeSolver.maxWGap2
+                              x)
+                             `cast`
+                           (Sym (Data.Sequence.NTCo:Elem[0] <WaterVolumeSolver.WaterGap>_R)))
+                          `cast`
+                        (Sym (Data.Sequence.NTCo:Seq[0] <WaterVolumeSolver.WaterGap>_R))
+                        (Data.Sequence.Single
+                           @ (Data.Sequence.Elem WaterVolumeSolver.WaterGap)
+                           (WaterVolumeSolver.WaterGap
+                              GHC.Base.maxInt
+                              WaterVolumeSolver.maxWGap2
+                              WaterVolumeSolver.maxWGap2
+                              x)
+                             `cast`
+                           (Sym (Data.Sequence.NTCo:Elem[0] <WaterVolumeSolver.WaterGap>_R)))
+                          `cast`
+                        (Sym (Data.Sequence.NTCo:Seq[0]
+                                  <WaterVolumeSolver.WaterGap>_R)) }) -}
+0b50b85c8eb24cd00f9cdfbd427758f1
+  $wsolve' ::
+    [GHC.Types.Int]
+    -> WaterVolumeSolver.WaterGaps
+    -> WaterVolumeSolver.WaterGaps
+    -> (# WaterVolumeSolver.WaterGaps, WaterVolumeSolver.WaterGaps #)
+  {- Arity: 3, Strictness: <S,1*U><L,U><L,U>, Inline: [0] -}
+46cb79059e6a9d7224ca5fd4e74e90f2
+  $wvolume ::
+    WaterVolumeSolver.WaterGaps
+    -> WaterVolumeSolver.WaterGaps -> GHC.Prim.Int#
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Inline: [0] -}
+3632f1d4156ed19a18202f541f20d917
+  abstract(True) C1_0WaterGap
+8176a213721a3bb48e236c5241aa67bd
+  abstract(True) D1WaterGap
+bbd4e79fcbb5dbdb46a320296c0791b5
+  type PillarLine =
+    (WaterVolumeSolver.WaterGaps, WaterVolumeSolver.WaterGaps)
+def4bbe3a0c19f0373c7a2ffa182aff2
+  axiom Rep_WaterGap::
+      GHC.Generics.Rep WaterVolumeSolver.WaterGap
+        = GHC.Generics.D1
+            WaterVolumeSolver.D1WaterGap
+            (GHC.Generics.C1
+               WaterVolumeSolver.C1_0WaterGap
+               ((GHC.Generics.S1
+                   WaterVolumeSolver.S1_0_0WaterGap (GHC.Generics.Rec0 GHC.Types.Int)
+                 GHC.Generics.:*: GHC.Generics.S1
+                                    WaterVolumeSolver.S1_0_1WaterGap
+                                    (GHC.Generics.Rec0 GHC.Types.Int))
+                GHC.Generics.:*: (GHC.Generics.S1
+                                    WaterVolumeSolver.S1_0_2WaterGap
+                                    (GHC.Generics.Rec0 GHC.Types.Int)
+                                  GHC.Generics.:*: GHC.Generics.S1
+                                                     WaterVolumeSolver.S1_0_3WaterGap
+                                                     (GHC.Generics.Rec0 GHC.Types.Int))))
+e7ef26a37e4afcbff2296045f4ecbd18
+  abstract(True) S1_0_0WaterGap
+d7519c7b093fd2000c40f4da7e95ba1c
+  abstract(True) S1_0_1WaterGap
+c8ccca71117d1eef8277c7061d0f2f85
+  abstract(True) S1_0_2WaterGap
+def4bbe3a0c19f0373c7a2ffa182aff2
+  abstract(True) S1_0_3WaterGap
+def4bbe3a0c19f0373c7a2ffa182aff2
+  data WaterGap
+    = WaterGap {_left :: GHC.Types.Int,
+                _blockSum :: GHC.Types.Int,
+                _blocks :: GHC.Types.Int,
+                _right :: GHC.Types.Int}
+95d646eac01f18d7dacd0504198e735f
+  type WaterGaps = Data.Sequence.Seq WaterVolumeSolver.WaterGap
+cb07e63f7014faf77e694e2188111798
+  _blockSum :: WaterVolumeSolver.WaterGap -> GHC.Types.Int
+  RecSel WaterVolumeSolver.WaterGap
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(LSLL),1*U(A,1*U(U),A,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ ds :: WaterVolumeSolver.WaterGap ->
+                 case ds of wild { WaterVolumeSolver.WaterGap ds1 ds2 ds3 ds4 ->
+                 ds2 }) -}
+d72a2fc076f94e52a0e237dc2221b95b
+  _blocks :: WaterVolumeSolver.WaterGap -> GHC.Types.Int
+  RecSel WaterVolumeSolver.WaterGap
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(LLSL),1*U(A,A,1*U(U),A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ ds :: WaterVolumeSolver.WaterGap ->
+                 case ds of wild { WaterVolumeSolver.WaterGap ds1 ds2 ds3 ds4 ->
+                 ds3 }) -}
+3125a7aa73c8b4c24b5c8e65f6835f43
+  _left :: WaterVolumeSolver.WaterGap -> GHC.Types.Int
+  RecSel WaterVolumeSolver.WaterGap
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(SLLL),1*U(1*U(U),A,A,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ ds :: WaterVolumeSolver.WaterGap ->
+                 case ds of wild { WaterVolumeSolver.WaterGap ds1 ds2 ds3 ds4 ->
+                 ds1 }) -}
+79eb9d5910a4ed6f4507965de328f176
+  _right :: WaterVolumeSolver.WaterGap -> GHC.Types.Int
+  RecSel WaterVolumeSolver.WaterGap
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(LLLS),1*U(A,A,A,1*U(U))>,
+     Unfolding: InlineRule (1, True, False)
+                (\ ds :: WaterVolumeSolver.WaterGap ->
+                 case ds of wild { WaterVolumeSolver.WaterGap ds1 ds2 ds3 ds4 ->
+                 ds4 }) -}
+d6a80ebd95012d0710f4b214858f3fff
+  addBlockVolume ::
+    (GHC.Types.Int, GHC.Types.Int)
+    -> WaterVolumeSolver.WaterGap -> WaterVolumeSolver.WaterGap
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S,1*U(1*U(U),1*U(U))><S,1*U(U,1*U(U),1*U(U),U)>m,
+     Unfolding: InlineRule (2, True, False)
+                (\ ds :: (GHC.Types.Int, GHC.Types.Int)
+                   ds1 :: WaterVolumeSolver.WaterGap ->
+                 case ds of wild { (,) bSum bNum ->
+                 case ds1 of wild1 { WaterVolumeSolver.WaterGap l bS bN r ->
+                 WaterVolumeSolver.WaterGap
+                   l
+                   (GHC.Num.$fNumInt_$c+ bS bSum)
+                   (GHC.Num.$fNumInt_$c+ bN bNum)
+                   r } }) -}
+fbf1204a77e3a48aa29a2e52f2d3f225
+  blVolDown ::
+    WaterVolumeSolver.WaterGaps -> (GHC.Types.Int, GHC.Types.Int)
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>m, Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ w :: WaterVolumeSolver.WaterGaps ->
+                 case WaterVolumeSolver.$wblVolDown w of ww { (#,#) ww1 ww2 ->
+                 (ww1, ww2) }) -}
+331f48e30339501aa41ea91b86094492
+  blVolUp ::
+    WaterVolumeSolver.WaterGaps -> (GHC.Types.Int, GHC.Types.Int)
+  {- Arity: 1, Strictness: <S,1*U>m, Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ w :: WaterVolumeSolver.WaterGaps ->
+                 case WaterVolumeSolver.$wblVolUp w of ww { (#,#) ww1 ww2 ->
+                 (ww1, ww2) }) -}
+ef2c266338282b3a2e8e1d48fdc3bb03
+  main :: GHC.Types.IO ()
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (0, True, True)
+                WaterVolumeSolver.main1
+                  `cast`
+                (Sym (GHC.Types.NTCo:IO[0] <()>_R)) -}
+c38ef7131baf2c58363aaeb48dd16d26
+  main1 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1, Strictness: <L,U> -}
+944ef4950b7b11414f274a13f35943cd
+  maxWGap ::
+    GHC.Types.Int -> Data.Sequence.Seq WaterVolumeSolver.WaterGap
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U>m2,
+     Unfolding: InlineRule (0, True, True)
+                WaterVolumeSolver.maxWGap1
+                  `cast`
+                (<GHC.Types.Int>_R
+                 ->_R Sym (Data.Sequence.NTCo:Seq[0]
+                               <WaterVolumeSolver.WaterGap>_R)) -}
+64c95cf543cebece245a31e88dca2147
+  maxWGap1 ::
+    GHC.Types.Int
+    -> Data.Sequence.FingerTree
+         (Data.Sequence.Elem WaterVolumeSolver.WaterGap)
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U>m2,
+     Unfolding: InlineRule (1, True, False)
+                (\ x :: GHC.Types.Int ->
+                 Data.Sequence.Single
+                   @ (Data.Sequence.Elem WaterVolumeSolver.WaterGap)
+                   (WaterVolumeSolver.WaterGap
+                      GHC.Base.maxInt
+                      WaterVolumeSolver.maxWGap2
+                      WaterVolumeSolver.maxWGap2
+                      x)
+                     `cast`
+                   (Sym (Data.Sequence.NTCo:Elem[0]
+                             <WaterVolumeSolver.WaterGap>_R))) -}
+118ece7d2d6df10a6656ad3eaead7a90
+  maxWGap2 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 0) -}
+9f308f04d35246c9004bcc49de844c14
+  merge ::
+    WaterVolumeSolver.PillarLine
+    -> WaterVolumeSolver.PillarLine -> WaterVolumeSolver.PillarLine
+  {- Arity: 2, Strictness: <S(LS),1*U(U,U)><S(SL),U(U,U)>m,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ w :: WaterVolumeSolver.PillarLine
+                   w1 :: WaterVolumeSolver.PillarLine ->
+                 case w of ww { (,) ww1 ww2 ->
+                 case w1 of ww3 { (,) ww4 ww5 ->
+                 case WaterVolumeSolver.$wmerge
+                        ww1
+                        ww2
+                        ww4
+                        ww5 of ww6 { (#,#) ww7 ww8 ->
+                 (ww7, ww8) } } }) -}
+728b0fd0b31893758b66da26080c1b92
+  mergeLeft ::
+    WaterVolumeSolver.WaterGaps
+    -> (GHC.Types.Int, GHC.Types.Int)
+    -> GHC.Types.Int
+    -> WaterVolumeSolver.WaterGaps
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: (\ ds :: WaterVolumeSolver.WaterGaps ->
+                 case Data.Sequence.viewl @ WaterVolumeSolver.WaterGap ds of wild {
+                   Data.Sequence.EmptyL -> WaterVolumeSolver.mergeLeftMany ds
+                   Data.Sequence.:< d ds1
+                   -> case Data.Sequence.viewl
+                             @ WaterVolumeSolver.WaterGap
+                             ds1 of wild1 {
+                        Data.Sequence.EmptyL
+                        -> let {
+                             lvl12 :: Data.Sequence.ViewL WaterVolumeSolver.WaterGap
+                             = Data.Sequence.viewl
+                                 @ WaterVolumeSolver.WaterGap
+                                 (Data.Sequence.Single
+                                    @ (Data.Sequence.Elem WaterVolumeSolver.WaterGap)
+                                    d `cast`
+                                    (Sym (Data.Sequence.NTCo:Elem[0]
+                                              <WaterVolumeSolver.WaterGap>_R)))
+                                   `cast`
+                                 (Sym (Data.Sequence.NTCo:Seq[0] <WaterVolumeSolver.WaterGap>_R))
+                           } in
+                           \ w :: (GHC.Types.Int, GHC.Types.Int) w1 :: GHC.Types.Int ->
+                           case w of ww { (,) ww1 ww2 ->
+                           case lvl12 of wild2 {
+                             Data.Sequence.EmptyL -> WaterVolumeSolver.mergeLeft1
+                             Data.Sequence.:< d1 ds2
+                             -> (Data.Sequence.<|_$sconsTree
+                                   @ WaterVolumeSolver.WaterGap
+                                   d1
+                                     `cast`
+                                   (Sym (Data.Sequence.NTCo:Elem[0] <WaterVolumeSolver.WaterGap>_R))
+                                   (Data.Sequence.Single
+                                      @ (Data.Sequence.Elem WaterVolumeSolver.WaterGap)
+                                      (WaterVolumeSolver.WaterGap
+                                         (case d1 of wild3 { WaterVolumeSolver.WaterGap ds3 ds4 ds5 ds6 ->
+                                          ds6 })
+                                         ww1
+                                         ww2
+                                         w1)
+                                        `cast`
+                                      (Sym (Data.Sequence.NTCo:Elem[0]
+                                                <WaterVolumeSolver.WaterGap>_R))))
+                                  `cast`
+                                (Sym (Data.Sequence.NTCo:Seq[0]
+                                          <WaterVolumeSolver.WaterGap>_R)) } }
+                        Data.Sequence.:< ipv ipv1
+                        -> WaterVolumeSolver.mergeLeftMany ds } }) -}
+0ea142f13d1846318873b7a3f4c844f8
+  mergeLeft1 :: WaterVolumeSolver.WaterGaps
+  {- Strictness: b -}
+b7a7414b3d79c78482cc5e7b8bd29c69
+  mergeLeftMany ::
+    WaterVolumeSolver.WaterGaps
+    -> (GHC.Types.Int, GHC.Types.Int)
+    -> GHC.Types.Int
+    -> WaterVolumeSolver.WaterGaps
+  {- Arity: 3, Strictness: <S,1*U><L,1*U(U(U),U(U))><L,1*U(U)> -}
+810e36d36b85132e3bb17e99c9aaf0e9
+  mergeLeftSingle ::
+    WaterVolumeSolver.WaterGaps
+    -> (GHC.Types.Int, GHC.Types.Int)
+    -> GHC.Types.Int
+    -> WaterVolumeSolver.WaterGaps
+  {- Arity: 3, Strictness: <S,1*U><S,1*U(U,U)><L,U>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (3, True, False)
+                (\ w :: WaterVolumeSolver.WaterGaps
+                   w1 :: (GHC.Types.Int, GHC.Types.Int)
+                   w2 :: GHC.Types.Int ->
+                 case w1 of ww { (,) ww1 ww2 ->
+                 WaterVolumeSolver.$wmergeLeftSingle w ww1 ww2 w2 }) -}
+ef015fc1f1aac9f5b3a9602dd4c763f4
+  mergeRight ::
+    WaterVolumeSolver.WaterGaps
+    -> (GHC.Types.Int, GHC.Types.Int)
+    -> (GHC.Types.Int, GHC.Types.Int)
+    -> GHC.Types.Int
+    -> WaterVolumeSolver.WaterGaps
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: (\ ds :: WaterVolumeSolver.WaterGaps ->
+                 case Data.Sequence.viewl @ WaterVolumeSolver.WaterGap ds of wild {
+                   Data.Sequence.EmptyL -> WaterVolumeSolver.mergeRightMany ds
+                   Data.Sequence.:< u ds1
+                   -> case Data.Sequence.viewl
+                             @ WaterVolumeSolver.WaterGap
+                             ds1 of wild1 {
+                        Data.Sequence.EmptyL
+                        -> let {
+                             lvl12 :: Data.Sequence.ViewL WaterVolumeSolver.WaterGap
+                             = Data.Sequence.viewl
+                                 @ WaterVolumeSolver.WaterGap
+                                 (Data.Sequence.Single
+                                    @ (Data.Sequence.Elem WaterVolumeSolver.WaterGap)
+                                    u `cast`
+                                    (Sym (Data.Sequence.NTCo:Elem[0]
+                                              <WaterVolumeSolver.WaterGap>_R)))
+                                   `cast`
+                                 (Sym (Data.Sequence.NTCo:Seq[0] <WaterVolumeSolver.WaterGap>_R))
+                           } in
+                           \ ds2 :: (GHC.Types.Int, GHC.Types.Int)
+                             ds3 :: (GHC.Types.Int, GHC.Types.Int)
+                             pillar :: GHC.Types.Int ->
+                           case lvl12 of wild2 {
+                             Data.Sequence.EmptyL -> WaterVolumeSolver.mergeRight1
+                             Data.Sequence.:< u1 ds4
+                             -> case ds3 of wild3 { (,) blSum blNum ->
+                                (Data.Sequence.Single
+                                   @ (Data.Sequence.Elem WaterVolumeSolver.WaterGap)
+                                   (WaterVolumeSolver.WaterGap
+                                      pillar
+                                      blSum
+                                      blNum
+                                      (case u1 of wild4 { WaterVolumeSolver.WaterGap ds5 ds6 ds7 ds8 ->
+                                       ds8 }))
+                                     `cast`
+                                   (Sym (Data.Sequence.NTCo:Elem[0]
+                                             <WaterVolumeSolver.WaterGap>_R)))
+                                  `cast`
+                                (Sym (Data.Sequence.NTCo:Seq[0]
+                                          <WaterVolumeSolver.WaterGap>_R)) } }
+                        Data.Sequence.:< ipv ipv1
+                        -> WaterVolumeSolver.mergeRightMany ds } }) -}
+a941de2a66d08d39800cf4726d0dd29a
+  mergeRight1 :: WaterVolumeSolver.WaterGaps
+  {- Strictness: b -}
+2f25b68b7482ba00f70ad07c23b38175
+  mergeRightMany ::
+    WaterVolumeSolver.WaterGaps
+    -> (GHC.Types.Int, GHC.Types.Int)
+    -> (GHC.Types.Int, GHC.Types.Int)
+    -> GHC.Types.Int
+    -> WaterVolumeSolver.WaterGaps
+  {- Arity: 4, HasNoCafRefs,
+     Strictness: <S,1*U><L,1*U(1*U(U),1*U(U))><L,1*U(U(U),U(U))><L,1*U(U)> -}
+1cc7a6b7b97526f2f92319deb534ab7a
+  mergeRightSingle ::
+    WaterVolumeSolver.WaterGaps
+    -> (GHC.Types.Int, GHC.Types.Int)
+    -> (GHC.Types.Int, GHC.Types.Int)
+    -> GHC.Types.Int
+    -> WaterVolumeSolver.WaterGaps
+  {- Arity: 4, Strictness: <S,1*U><L,A><S,1*U(U,U)><L,U>m2,
+     Unfolding: InlineRule (4, True, False)
+                (\ ds :: WaterVolumeSolver.WaterGaps
+                   ds1 :: (GHC.Types.Int, GHC.Types.Int)
+                   ds2 :: (GHC.Types.Int, GHC.Types.Int)
+                   pillar :: GHC.Types.Int ->
+                 case Data.Sequence.viewl @ WaterVolumeSolver.WaterGap ds of wild {
+                   Data.Sequence.EmptyL -> WaterVolumeSolver.mergeRight1
+                   Data.Sequence.:< u ds3
+                   -> case ds2 of wild1 { (,) blSum blNum ->
+                      (Data.Sequence.Single
+                         @ (Data.Sequence.Elem WaterVolumeSolver.WaterGap)
+                         (WaterVolumeSolver.WaterGap
+                            pillar
+                            blSum
+                            blNum
+                            (case u of wild2 { WaterVolumeSolver.WaterGap ds4 ds5 ds6 ds7 ->
+                             ds7 }))
+                           `cast`
+                         (Sym (Data.Sequence.NTCo:Elem[0] <WaterVolumeSolver.WaterGap>_R)))
+                        `cast`
+                      (Sym (Data.Sequence.NTCo:Seq[0]
+                                <WaterVolumeSolver.WaterGap>_R)) } }) -}
+861d5fca9bfdf2d176357f0170c8417d
+  minWGap ::
+    GHC.Types.Int -> Data.Sequence.Seq WaterVolumeSolver.WaterGap
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U>m2,
+     Unfolding: InlineRule (0, True, True)
+                WaterVolumeSolver.minWGap1
+                  `cast`
+                (<GHC.Types.Int>_R
+                 ->_R Sym (Data.Sequence.NTCo:Seq[0]
+                               <WaterVolumeSolver.WaterGap>_R)) -}
+c3fcc3923b3581a97d7c65578be54c64
+  minWGap1 ::
+    GHC.Types.Int
+    -> Data.Sequence.FingerTree
+         (Data.Sequence.Elem WaterVolumeSolver.WaterGap)
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U>m2,
+     Unfolding: InlineRule (1, True, False)
+                (\ x :: GHC.Types.Int ->
+                 Data.Sequence.Single
+                   @ (Data.Sequence.Elem WaterVolumeSolver.WaterGap)
+                   (WaterVolumeSolver.WaterGap
+                      GHC.Base.minInt
+                      WaterVolumeSolver.maxWGap2
+                      WaterVolumeSolver.maxWGap2
+                      x)
+                     `cast`
+                   (Sym (Data.Sequence.NTCo:Elem[0]
+                             <WaterVolumeSolver.WaterGap>_R))) -}
+c0d27833c77be9760ccb83d666cbff12
+  parEval ::
+    GHC.Types.Int
+    -> [GHC.Types.Int]
+    -> Control.Monad.Par.Scheds.TraceInternal.Par
+         WaterVolumeSolver.PillarLine
+  {- Arity: 2, Strictness: <L,U(U)><L,1*U>,
+     Unfolding: (\ n :: GHC.Types.Int xs :: [GHC.Types.Int] ->
+                 let {
+                   lvl12 :: GHC.Types.Int
+                   = case n of wild { GHC.Types.I# x ->
+                     GHC.Types.I# (GHC.Prim.*# x 2) }
+                 } in
+                 let {
+                   m :: Control.Monad.Par.Scheds.TraceInternal.Par
+                          (Data.Sequence.Seq WaterVolumeSolver.PillarLine)
+                   = WaterVolumeSolver.parEvalChunk n xs
+                 } in
+                 (\ c :: WaterVolumeSolver.PillarLine
+                         -> Control.Monad.Par.Scheds.TraceInternal.Trace ->
+                  m `cast`
+                  (Control.Monad.Par.Scheds.TraceInternal.NTCo:Par[0]
+                       <Data.Sequence.Seq WaterVolumeSolver.PillarLine>_R)
+                    (\ a11 :: Data.Sequence.Seq WaterVolumeSolver.PillarLine ->
+                     let {
+                       a4 :: GHC.Prim.Int#
+                             -> (WaterVolumeSolver.PillarLine
+                                 -> Control.Monad.Par.Scheds.TraceInternal.Trace)
+                             -> Control.Monad.Par.Scheds.TraceInternal.Trace
+                         {- Arity: 2, Strictness: <L,U><L,U> -}
+                       = \ x :: GHC.Prim.Int#[OneShot]
+                           eta :: WaterVolumeSolver.PillarLine
+                                  -> Control.Monad.Par.Scheds.TraceInternal.Trace[OneShot] ->
+                         case lvl12 of wild1 { GHC.Types.I# y ->
+                         case GHC.Prim.tagToEnum#
+                                @ GHC.Types.Bool
+                                (GHC.Prim.>=# x y) of wild {
+                           GHC.Types.False
+                           -> eta
+                                (Data.Sequence.$fFoldableFingerTree_$cfoldl2
+                                   @ WaterVolumeSolver.PillarLine
+                                   @ (Data.Sequence.Elem WaterVolumeSolver.PillarLine)
+                                   WaterVolumeSolver.merge
+                                     `cast`
+                                   (<WaterVolumeSolver.PillarLine>_R
+                                    ->_R Sym (Data.Sequence.NTCo:Elem[0]
+                                                  <WaterVolumeSolver.PillarLine>_R)
+                                    ->_R <WaterVolumeSolver.PillarLine>_R)
+                                   (WaterVolumeSolver.sHead @ WaterVolumeSolver.PillarLine a11)
+                                   (WaterVolumeSolver.sTail @ WaterVolumeSolver.PillarLine a11)
+                                     `cast`
+                                   (Data.Sequence.NTCo:Seq[0] <WaterVolumeSolver.PillarLine>_R))
+                           GHC.Types.True
+                           -> (WaterVolumeSolver.parFoldChunk n a11)
+                                `cast`
+                              (Control.Monad.Par.Scheds.TraceInternal.NTCo:Par[0]
+                                   <WaterVolumeSolver.PillarLine>_R)
+                                eta } }
+                     } in
+                     case a11
+                            `cast`
+                          (Data.Sequence.NTCo:Seq[0]
+                               <WaterVolumeSolver.PillarLine>_R) of wild {
+                       Data.Sequence.Empty -> a4 0 c
+                       Data.Sequence.Single x -> a4 1 c
+                       Data.Sequence.Deep dt ds1 ds2 ds3 -> a4 dt c }))
+                   `cast`
+                 (Sym (Control.Monad.Par.Scheds.TraceInternal.NTCo:Par[0]
+                           <WaterVolumeSolver.PillarLine>_R))) -}
+18b3a16378548518613564fde41f0111
+  parEvalChunk ::
+    GHC.Types.Int
+    -> [GHC.Types.Int]
+    -> Control.Monad.Par.Scheds.TraceInternal.Par
+         (Data.Sequence.Seq WaterVolumeSolver.PillarLine)
+  {- Arity: 2, Strictness: <L,U(U)><S,1*U> -}
+f295b1c7cbc1d6a2695001851090e2e6
+  parFoldChunk ::
+    GHC.Types.Int
+    -> Data.Sequence.Seq WaterVolumeSolver.PillarLine
+    -> Control.Monad.Par.Scheds.TraceInternal.Par
+         WaterVolumeSolver.PillarLine
+  {- Arity: 2, Strictness: <L,U(U)><S,U> -}
+418a6b6d4ce4687a5b9e9dfaed58416c
+  sHead :: Data.Sequence.Seq a -> a
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ @ a4 ds :: Data.Sequence.Seq a4 ->
+                 case Data.Sequence.viewl @ a4 ds of wild {
+                   Data.Sequence.EmptyL -> WaterVolumeSolver.sHead1 @ a4
+                   Data.Sequence.:< a5 set -> a5 }) -}
+1b4349dbc6f1a245bb1d6c1897071a70
+  sHead1 :: a
+  {- Strictness: b -}
+e0fab118b354c491ebfdc3f24be1ad01
+  sInit :: Data.Sequence.Seq a -> Data.Sequence.Seq a
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ @ a4 ds :: Data.Sequence.Seq a4 ->
+                 case Data.Sequence.viewr @ a4 ds of wild {
+                   Data.Sequence.EmptyR -> WaterVolumeSolver.sInit1 @ a4
+                   Data.Sequence.:> set ds1 -> set }) -}
+e82e297276078e3a67de53646e87065b
+  sInit1 :: Data.Sequence.Seq a
+  {- Strictness: b -}
+2866423f77f8b525bacd3470ed4db7c0
+  sLast :: Data.Sequence.Seq a -> a
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ @ a4 ds :: Data.Sequence.Seq a4 ->
+                 case Data.Sequence.viewr @ a4 ds of wild {
+                   Data.Sequence.EmptyR -> WaterVolumeSolver.sLast1 @ a4
+                   Data.Sequence.:> ds1 a5 -> a5 }) -}
+9d8121b1f262532ef24fd3cb366de7e7
+  sLast1 :: a
+  {- Strictness: b -}
+5f6a1117809aa6601007e888514ab356
+  sTail :: Data.Sequence.Seq a -> Data.Sequence.Seq a
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ @ a4 ds :: Data.Sequence.Seq a4 ->
+                 case Data.Sequence.viewl @ a4 ds of wild {
+                   Data.Sequence.EmptyL -> WaterVolumeSolver.sTail1 @ a4
+                   Data.Sequence.:< ds1 set -> set }) -}
+455b3f611eac5d083b03e3bf8dd7cb14
+  sTail1 :: Data.Sequence.Seq a
+  {- Strictness: b -}
+6371bd1bf4141cfef2ba58bbbde8768f
+  solve :: [GHC.Types.Int] -> WaterVolumeSolver.PillarLine
+  {- Arity: 1, Strictness: <S,1*U>m, Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ w :: [GHC.Types.Int] ->
+                 case WaterVolumeSolver.$wsolve w of ww { (#,#) ww1 ww2 ->
+                 (ww1, ww2) }) -}
+14ec7ee8827029514c288c8cbf98057d
+  solve' ::
+    [GHC.Types.Int]
+    -> WaterVolumeSolver.WaterGaps
+    -> WaterVolumeSolver.WaterGaps
+    -> WaterVolumeSolver.PillarLine
+  {- Arity: 3, Strictness: <S,1*U><L,U><L,U>m, Inline: INLINE[0],
+     Unfolding: InlineRule (3, True, False)
+                (\ w :: [GHC.Types.Int]
+                   w1 :: WaterVolumeSolver.WaterGaps
+                   w2 :: WaterVolumeSolver.WaterGaps ->
+                 case WaterVolumeSolver.$wsolve' w w1 w2 of ww { (#,#) ww1 ww2 ->
+                 (ww1, ww2) }) -}
+4ad6d7348d4517a888cf6dbbac2c6285
+  solve1 :: WaterVolumeSolver.PillarLine
+  {- Strictness: b -}
+7f54fa1e3fb704b51b15eeab63ed1a4a
+  volume :: WaterVolumeSolver.PillarLine -> GHC.Types.Int
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(SS),1*U(1*U,1*U)>m,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ w :: WaterVolumeSolver.PillarLine ->
+                 case w of ww { (,) ww1 ww2 ->
+                 case WaterVolumeSolver.$wvolume ww1 ww2 of ww3 { DEFAULT ->
+                 GHC.Types.I# ww3 } }) -}
+05c8c23a49395af7995bc2e0d9a2fe24
+  volumeWaterGap :: WaterVolumeSolver.WaterGap -> GHC.Types.Int
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(SSSS),1*U(1*U(U),1*U(U),1*U(U),1*U(U))>m,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ w :: WaterVolumeSolver.WaterGap ->
+                 case w of ww { WaterVolumeSolver.WaterGap ww1 ww2 ww3 ww4 ->
+                 case ww1 of ww5 { GHC.Types.I# ww6 ->
+                 case ww2 of ww7 { GHC.Types.I# ww8 ->
+                 case ww3 of ww9 { GHC.Types.I# ww10 ->
+                 case ww4 of ww11 { GHC.Types.I# ww12 ->
+                 case GHC.Prim.tagToEnum#
+                        @ GHC.Types.Bool
+                        (GHC.Prim.<=# ww6 ww12) of wild2 {
+                   GHC.Types.False
+                   -> GHC.Types.I# (GHC.Prim.-# (GHC.Prim.*# ww12 ww10) ww8)
+                   GHC.Types.True
+                   -> GHC.Types.I#
+                        (GHC.Prim.-# (GHC.Prim.*# ww6 ww10) ww8) } } } } } }) -}
+instance GHC.Generics.Constructor [WaterVolumeSolver.C1_0WaterGap]
+  = WaterVolumeSolver.$fConstructorWaterGap
+instance GHC.Generics.Datatype [WaterVolumeSolver.D1WaterGap]
+  = WaterVolumeSolver.$fDatatypeWaterGap
+instance GHC.Classes.Eq [WaterVolumeSolver.WaterGap]
+  = WaterVolumeSolver.$fEqWaterGap
+instance GHC.Generics.Generic [WaterVolumeSolver.WaterGap]
+  = WaterVolumeSolver.$fGenericWaterGap
+instance Control.DeepSeq.NFData [WaterVolumeSolver.WaterGap]
+  = WaterVolumeSolver.$fNFDataWaterGap
+instance GHC.Classes.Ord [WaterVolumeSolver.WaterGap]
+  = WaterVolumeSolver.$fOrdWaterGap
+instance GHC.Generics.Selector [WaterVolumeSolver.S1_0_0WaterGap]
+  = WaterVolumeSolver.$fSelectorWaterGap
+instance GHC.Generics.Selector [WaterVolumeSolver.S1_0_1WaterGap]
+  = WaterVolumeSolver.$fSelectorWaterGap0
+instance GHC.Generics.Selector [WaterVolumeSolver.S1_0_2WaterGap]
+  = WaterVolumeSolver.$fSelectorWaterGap1
+instance GHC.Generics.Selector [WaterVolumeSolver.S1_0_3WaterGap]
+  = WaterVolumeSolver.$fSelectorWaterGap2
+instance GHC.Show.Show [WaterVolumeSolver.WaterGap]
+  = WaterVolumeSolver.$fShowWaterGap
+family instance GHC.Generics.Rep [WaterVolumeSolver.WaterGap]
+  = WaterVolumeSolver.Rep_WaterGap
+"SPEC/WaterVolumeSolver $dmconFixity @ C1_0WaterGap" [ALWAYS] forall $dConstructor :: GHC.Generics.Constructor
+                                                                                        WaterVolumeSolver.C1_0WaterGap
+  GHC.Generics.$dmconFixity @ WaterVolumeSolver.C1_0WaterGap
+                            $dConstructor
+  = WaterVolumeSolver.$fConstructorWaterGap_$s$dmconFixity
+"SPEC/WaterVolumeSolver $dmisNewtype @ D1WaterGap" [ALWAYS] forall $dDatatype :: GHC.Generics.Datatype
+                                                                                   WaterVolumeSolver.D1WaterGap
+  GHC.Generics.$dmisNewtype @ WaterVolumeSolver.D1WaterGap $dDatatype
+  = WaterVolumeSolver.$fDatatypeWaterGap_$s$dmisNewtype
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: none
+require own pkg trusted: False
+
