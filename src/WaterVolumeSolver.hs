@@ -44,9 +44,10 @@ main = do
     --and stop the timer once the volume has been calculated
     (vol,ts) <- deepseq list $ stopWatch $ do
         let watergaps = runPar $ parEval 100 list
-        return $ volume watergaps
-    putStrLn $ "Volume: " ++ show vol
-    putStrLn $ "Time in ms: " ++ show (fromIntegral (toNanoSecs ts) / 1000000)
+        let v = volume watergaps
+        deepseq v $ return v
+    putStrLn $ show vol
+    putStrLn $ show (fromIntegral (toNanoSecs ts) / 1000000)
 
 parEval :: Int -> [Int] -> Par PillarLine
 parEval n xs = do
