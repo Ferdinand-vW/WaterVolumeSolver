@@ -8,7 +8,7 @@ import System.Environment
 import Control.DeepSeq
 import Control.Monad.Par
 import Control.StopWatch
-import System.Clock (TimeSpec(..))
+import System.Clock (TimeSpec(..),toNanoSecs)
 import Data.Sequence (viewl,ViewL(..),viewr,ViewR(..),Seq,
                      (<|),(|>),(><),empty,singleton, splitAt)
 import Data.List(foldl')
@@ -42,11 +42,11 @@ main = do
     let list = read ('[' : s ++ "]") :: [Int]
     --Force the input into memory before computation
     --and stop the timer once the volume has been calculated
-    (vol,TimeSpec sec nsec) <- deepseq list $ stopWatch $ do
+    (vol,ts) <- deepseq list $ stopWatch $ do
         let watergaps = runPar $ parEval 100 list
         return $ volume watergaps
     putStrLn $ "Volume: " ++ show vol
-    putStrLn $ "Time in ms: " ++ show ((fromIntegral sec) * 1000 + (fromIntegral nsec) / 1000000)
+    putStrLn $ "Time in ms: " ++ show (fromIntegral (toNanoSecs ts) / 1000000)
 
 parEval :: Int -> [Int] -> Par PillarLine
 parEval n xs = do
