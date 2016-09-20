@@ -11,6 +11,7 @@ import Control.StopWatch
 import System.Clock (TimeSpec(..))
 import Data.Sequence (viewl,ViewL(..),viewr,ViewR(..),Seq,
                      (<|),(|>),(><),empty,singleton, splitAt)
+import Data.List(foldl')
 
 data WaterGap = WaterGap {
                     _left     :: Int, --Left highest pillar of this gap
@@ -52,7 +53,7 @@ parEval n xs = do
     mergedWaterGaps <- parEvalChunk n xs
     if length mergedWaterGaps >= n * 2
         then parFoldChunk n mergedWaterGaps
-        else return $ foldl merge (sHead mergedWaterGaps) (sTail mergedWaterGaps) --Final merge
+        else return $ foldl' merge (sHead mergedWaterGaps) (sTail mergedWaterGaps) --Final merge
 
 parEvalChunk :: Int -> [Int] -> Par (Seq PillarLine)
 parEvalChunk n [] = return empty
@@ -69,7 +70,7 @@ parFoldChunk _ (viewl -> EmptyL) = return (empty,empty)
 parFoldChunk n xs = do
     let (chunk, rest) = Data.Sequence.splitAt n xs
     nv <- new
-    fork $ put nv (foldl merge (sHead chunk) (sTail chunk))
+    fork $ put nv (foldl' merge (sHead chunk) (sTail chunk))
     ys <- parFoldChunk n rest
     y <- get nv
     if length rest > 0
