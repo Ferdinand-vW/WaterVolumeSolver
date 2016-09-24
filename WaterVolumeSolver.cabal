@@ -21,13 +21,16 @@ library
                        monad-par,
                        containers,
                        stopwatch,
-                       clock
+                       clock,
+                       bytestring,
+                       vector,
+                       parallel
   default-language:    Haskell2010
 
 executable WaterVolumeSolver-exe
   hs-source-dirs:      app
   main-is:             Main.hs
-  ghc-options:         -threaded -O2 -rtsopts -with-rtsopts=-N4
+  ghc-options:         -threaded -O2 -rtsopts -with-rtsopts=-N
   build-depends:       base
                      , WaterVolumeSolver
   default-language:    Haskell2010

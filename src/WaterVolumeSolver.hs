@@ -8,10 +8,14 @@ import System.Environment
 import Control.DeepSeq
 import Control.Monad.Par
 import Control.StopWatch
+import Data.Maybe
+
+import qualified Data.ByteString.Char8 as B (readInt,splitWith,readFile,pack,foldl')
 import System.Clock (TimeSpec(..),toNanoSecs)
 import Data.Sequence (viewl,ViewL(..),viewr,ViewR(..),Seq,
-                     (<|),(|>),(><),empty,singleton, splitAt)
-import Data.List(foldl')
+                     (<|),(|>),(><),empty,singleton, splitAt,reverse)
+import Data.List(foldl',foldl1')
+import qualified Data.Vector as V
 
 data WaterGap = WaterGap {
                     _left     :: Int, --Left highest pillar of this gap
@@ -37,34 +41,35 @@ sTail :: Seq a -> Seq a
 sTail (viewl -> _ :< set) = set
 
 main = do
-    [fpath, _] <- getArgs
-    s <- readFile fpath
-    let list = read ('[' : s ++ "]") :: [Int]
+    [fpath, n] <- getArgs
+    s <- B.readFile fpath
+    let list = V.map (fst . fromJust . B.readInt) $ V.fromList $ B.splitWith (==',') s
     --Force the input into memory before computation
     --and stop the timer once the volume has been calculated
     (vol,ts) <- deepseq list $ stopWatch $ do
-        let watergaps = runPar $ parEval 100 list
+        let watergaps = runPar $ parEval 300 list
         let v = volume watergaps
         deepseq v $ return v
     putStrLn $ show vol
     putStrLn $ show (fromIntegral (toNanoSecs ts) / 1000000)
 
-parEval :: Int -> [Int] -> Par PillarLine
+parEval :: Int -> V.Vector Int -> Par PillarLine
 parEval n xs = do
     mergedWaterGaps <- parEvalChunk n xs
     if length mergedWaterGaps >= n * 2
         then parFoldChunk n mergedWaterGaps
         else return $ foldl' merge (sHead mergedWaterGaps) (sTail mergedWaterGaps) --Final merge
 
-parEvalChunk :: Int -> [Int] -> Par (Seq PillarLine)
-parEvalChunk n [] = return empty
-parEvalChunk n xs = do
-    let (chunk, rest) = Prelude.splitAt n xs
-    nv <- new  --Create a mutable container that will store the result of the computation
-    fork $ put nv (solve chunk) --Start parallel computation on a chunk
-    ys <- parEvalChunk n rest --Start parallel computation on the rest
-    y <- get nv --retrieve the result
-    return $ y <| ys
+parEvalChunk :: Int -> V.Vector Int -> Par (Seq PillarLine)
+parEvalChunk n vec
+    | V.null vec = return empty
+    | otherwise = do
+        let (chunk, rest) = V.splitAt n vec
+        nv <- new  --Create a mutable container that will store the result of the computation
+        fork $ put nv (solve chunk) --Start parallel computation on a chunk
+        ys <- parEvalChunk n rest --Start parallel computation on the rest
+        y <- get nv --retrieve the result
+        return $ y <| ys
 
 parFoldChunk :: Int -> (Seq PillarLine) -> Par PillarLine
 parFoldChunk _ (viewl -> EmptyL) = return (empty,empty)
@@ -78,11 +83,9 @@ parFoldChunk n xs = do
         then return $ y `merge` ys
         else return y
 
-maxWGap x = singleton $ WaterGap maxBound 0 0 x
-minWGap x = singleton $ WaterGap minBound 0 0 x
+maxWGap x = WaterGap maxBound 0 0 x
+minWGap x = WaterGap minBound 0 0 x
 
-solve :: [Int] -> PillarLine --
-solve (x:xs) = solve' xs (minWGap x) (maxWGap x)
 
 --Using initial watergaps, compute a sequence of watergaps
 --Watergaps can move upward (5,1,1,6), downward (6,1,1,4)
@@ -95,25 +98,25 @@ solve (x:xs) = solve' xs (minWGap x) (maxWGap x)
 --This is also explains why I use a maxWaterGap and a minimumWaterGap
 --If we only have a single pillar, then I can't decide whether it is
 --upward going or downward going, since no watergap could be created
-solve' :: [Int] -> WaterGaps -> WaterGaps -> PillarLine
-solve' [] us ds = (us,ds) --Finished solving
-solve' (x:xs) us ds
-    | x >= _right (sLast us) = solve' xs (us >< (singleton wgapWithDownVol)) (maxWGap x)
-    | x >  _right (sLast ds) = solve' xs  us (strip 0 0 ds)
-    | otherwise              = solve' xs  us (ds >< (singleton $ newWGap (_right $ sLast ds)))
+solve :: V.Vector Int -> PillarLine
+solve vec 
+    | V.null vec = (empty,empty)
+    | otherwise = (maxWGap (V.head vec) <| upwGaps, minWGap lim <| dwnGaps)
     where
-        --Any downwards gaps can be removed and added to the new upward gap
-        wgapWithDownVol = addBlockVolume downVol (newWGap $ _right $ sLast us)
-        downVol = blVolDown (sTail ds) --Calculate downward gap volume
-        newWGap lpill = WaterGap lpill 0 0 x
-        --Creates a new watergap from highest pillar to new lowest pillar
-        --containing the volume of any stripped watergaps
-        strip bNum bSum (viewl -> EmptyL) = singleton $ WaterGap (_right (sLast us)) bSum bNum x
-        strip bNum bSum ys
-            | x > _right (sLast ys) = strip (bNum + _blocks (sLast ys) + 1)
-                                            (bSum + _blockSum (sLast ys) + _right (sLast ys)) 
-                                            (sInit ys)
-            | otherwise = ys >< (singleton $ WaterGap (_right (sLast ys)) bSum bNum x)
+        (_,_,_,lim,upwGaps) = solveUpw (V.tail vec) (V.head vec)
+        (_,_,_,dwnGaps) = solveDownw (V.tail $ V.reverse vec) (V.last vec) lim
+
+solveUpw :: V.Vector Int -> Int -> (Int, Int, Int, Int, WaterGaps)
+solveUpw vec mpill = V.foldl' (\(mp,bSum,bNum,lim,wgs) n ->
+                        if n >= mp
+                            then (n,0,0,n,wgs |> WaterGap mp bSum bNum n)
+                            else (mp,bSum + n, bNum + 1, lim, wgs)) (mpill,0,0,mpill,empty) vec
+
+solveDownw :: V.Vector Int -> Int -> Int -> (Int, Int, Int, WaterGaps)
+solveDownw vec mpill lim = V.foldl' (\(mp,bSum,bNum, wgs) n ->
+                                if n > mp
+                                    then (n,0,0, WaterGap n bSum bNum mp <| wgs)
+                                    else (mp, bSum + n, bNum + 1, wgs)) (mpill,0,0,empty) vec
 
 --The merge function takes two already solved watergaps and attempts to merge them
 --In a sense we are trying to create a single watergap that creates a bridge between
@@ -181,22 +184,15 @@ addBlockVolume :: (Int, Int) -> WaterGap -> WaterGap
 addBlockVolume (bSum,bNum) (WaterGap l bS bN r) = WaterGap l (bS + bSum) (bN + bNum) r
 
 blVolDown :: WaterGaps -> (Int, Int)
-blVolDown (viewl -> EmptyL) = (0,0)
-blVolDown (viewl -> d:<ds) = 
-    let (dsSum,dsNum) = blVolDown ds
-    in (dsSum + _blockSum d + _right d, dsNum + _blocks d + 1) 
+blVolDown = foldl' (\acc wg -> (fst acc + _blockSum wg + _right wg, snd acc + _blocks wg + 1)) (0,0)
 
 blVolUp :: WaterGaps -> (Int, Int)
-blVolUp us
-    | not (null us) = 
-        let (uSum, uNum) = blVolUp (sInit us)
-        in (uSum + (_left (sLast us)) + (_blockSum (sLast us)), uNum + (_blocks (sLast us)) + 1)
-    | otherwise = (0,0)
+blVolUp = foldl' (\acc wg -> (fst acc + _blockSum wg + _left wg, snd acc + _blocks wg + 1)) (0,0)
 
 volume :: PillarLine -> Int
-volume (viewl -> EmptyL,viewl -> EmptyL) = 0
-volume (viewl -> u :< us,ds) = volumeWaterGap u + volume (us,ds)
-volume (viewl -> EmptyL,viewl -> d:<ds) = volumeWaterGap d + volume (empty,ds)
+volume (lpl,rpl) = f lpl + f rpl
+    where
+        f = foldl' (\acc wg -> acc + volumeWaterGap wg) 0
 
 --The volume of a watergap [5,2,3,6] is calculated as follows:
 --min(5,6) * 2 - (2 + 3) =

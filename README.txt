@@ -7,4 +7,4 @@ stack setup
 stack build
 
 RUN:
-stack exec WaterVolumeSolver-exe filepath X
+stack exec WaterVolumeSolver-exe filepath X -- +RTS -H3.5G
